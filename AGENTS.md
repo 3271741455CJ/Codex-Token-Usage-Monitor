@@ -1,0 +1,18 @@
+# Codex modification instructions / Codex 项目修改规范
+
+These instructions govern Codex/contributor changes, not application runtime behavior. Product privacy constraints live in [SECURITY.md](SECURITY.md).
+
+1. **首要保密原则 / Confidentiality first:** uphold `SECURITY.md`. Never expose real credentials, identity, private configuration, paths, conversations or logs in tool output, messages, fixtures or external requests. The owner permits only the necessary credentials/account identifier to be sent for OpenAI official authentication; no other destination, report display or credential fragment output is allowed.
+2. **最小改动原则 / Explicit scope only:** when the user asks Codex to modify this project, change only what they explicitly requested and the directly necessary tests/documentation. Do not make unrelated fixes, refactors, formatting, upgrades or behavior changes. A maintenance checklist does not authorize broader changes. Clarify material scope ambiguity before expanding scope. This is a rule for Codex modifying the repository, not a product feature or runtime constraint.
+
+- Preserve default offline collection and read-only source handling. The owner permits networking as needed for report data, subject to `SECURITY.md`; this is not permission to send private input in searches or requests. External networking remains the opt-in official adapter in [docs/OFFICIAL_SYNC.md](docs/OFFICIAL_SYNC.md), with collector Python networking blocked and the static viewer offline; the authorized local service exception is listed below. No telemetry, private uploads, dependency downloads, remote assets or cloud publication.
+- Never modify original Codex configuration, credentials, logs or databases. SQLite reads must use temporary copies in the allowed report directory.
+- Keep real credentials, account data, logs, reports and exports out of commits, fixtures, tool output and issue attachments. Test with synthetic data.
+- Before changes, read the relevant code and [maintenance matrix](docs/MAINTENANCE.md). Update affected documentation in the same change.
+- Full English documentation belongs in `README/README.md`; full Simplified Chinese documentation belongs in `README/README-Simplified_Chinese.md`. Root `README.md` is only the entry/summary page. Keep their facts consistent.
+- Update `WORKLOG.md` for completed work and actual checks; update `CHANGELOG.md` for user-visible changes. `VERSION` is the authoritative version. Never invent a publication date or claim a release happened without evidence.
+- Keep `docs/FILE_GUIDE.md` current when files or architecture change. Follow `docs/RELEASING.md` before a release.
+- Run checks appropriate to the change: Python `python -B -m unittest discover -s tests -v`; frontend `node tests/test_dashboard.cjs`. Documentation-only work needs link/version/ignore review, not a claimed implementation test rerun.
+- Do not automatically commit, tag, push, create a GitHub release, or choose a license merely because these files describe future publication. Obtain an explicit user task for those actions.
+
+- The owner additionally authorized local interactive refresh and document/image exports on 2026-10-30. The narrowly scoped loopback service and fixed collector workers are described in `docs/INTERACTIVE_REPORTS.md`. Preserve its origin/route checks and the collector's existing guard; do not interpret this as permission for arbitrary network or process access.

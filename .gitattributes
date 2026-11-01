@@ -1,0 +1,7 @@
+* text=auto
+*.md text eol=lf
+*.py text eol=lf
+*.html text eol=lf
+*.cjs text eol=lf
+*.cmd text eol=crlf
+VERSION text eol=lf

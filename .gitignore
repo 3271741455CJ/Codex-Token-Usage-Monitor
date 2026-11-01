@@ -1,0 +1,45 @@
+.reports/
+.qa/
+__pycache__/
+*.pyc
+.venv/
+*.lnk
+
+# Credentials and private Codex source data: never publish real copies.
+.codex/
+auth.json
+config.toml
+.env
+.env.*
+*.pem
+*.key
+*.jsonl
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.log
+*.csv
+
+# Generated reports even when copied outside the standard output folders.
+latest.html
+latest.html.tmp
+usage.json
+.official-*/
+
+# Local editor and OS files.
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+*.tmp
+
+# Multi-format private output
+report.docx
+records.xlsx
+report.pdf
+overview.png
+overview.jpg
+overview.webp
+overview.svg
+snapshot-*/
