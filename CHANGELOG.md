@@ -5,6 +5,18 @@ Versions use `MAJOR.MINOR.PATCH`; tags use `vMAJOR.MINOR.PATCH`. A heading is no
 
 ## Unreleased / 待发布变更
 
+## 0.2.0 — Desktop distribution / 桌面分发
+
+Publication is evidenced by the matching GitHub Release, not this heading.
+
+- Added bounded startup checks against public stable GitHub Releases, update consent, `--no-update-check` and `--version`; local refresh workers never prompt.
+- Added native standalone Windows installer/portable ZIP, macOS Intel/Apple Silicon DMGs and Linux x64/ARM64 DEB/tar.gz, bundled Python/export dependencies and an OFL Chinese font.
+- Added per-user installed output, frozen worker dispatch and default-browser launch across desktop platforms.
+- Added clean native CI, standalone and Windows install/uninstall checks, complete-release publication and SHA-256 inventories.
+- Added optional verified Windows code signing and timestamps, non-elevated installation, version metadata and unpacked/no-UPX bundles; unsigned/new apps may still warn. macOS builds are not notarized.
+- Compatibility: startup now makes a public version request unless disabled; guarded collection and saved HTML remain offline. Optional official sync remains Windows-specific.
+
+
 - Adopted the MIT License for public distribution.
 
 - Added whole-snapshot DOCX/PDF reports, XLSX records and PNG/JPEG/WebP/SVG overview exports alongside filtered CSV.

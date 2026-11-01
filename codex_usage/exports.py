@@ -7,6 +7,15 @@ from .privacy import protect_report
 FILES = ('report.docx', 'records.xlsx', 'report.pdf', 'overview.png', 'overview.jpg', 'overview.webp', 'overview.svg')
 NOTE = '本地明细与官方账号统计分别展示，不相加。缺失值为未知。敏感原文请自行查看本地源文件。'
 
+def chinese_font():
+    bundled = (Path(__file__).with_name('assets') / 'ReportSansSC.ttf').resolve()
+    candidates = [bundled, Path(os.environ.get('WINDIR','C:/Windows'))/'Fonts'/'msyh.ttc',
+                  Path('/System/Library/Fonts/Supplemental/Songti.ttc'),
+                  Path('/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf')]
+    for candidate in candidates:
+        if candidate.is_file(): return candidate
+    raise RuntimeError('local Chinese TrueType font required; use the standalone release')
+
 def summary(data):
     local = data.get('totals') or {}
     official = data.get('official_usage') or {}
@@ -32,8 +41,7 @@ def write_exports(report, output):
     data = protect_report(report)
     output = Path(output)
     rows = summary(data)
-    font_path=Path(os.environ.get('WINDIR','C:/Windows'))/'Fonts'/'msyh.ttc'
-    if not font_path.is_file(): raise RuntimeError('local Chinese font required')
+    font_path=chinese_font()
     daily = (data.get('official_usage') or {}).get('daily') or []
     def value(row,key):
         v=row.get(key)
@@ -136,8 +144,6 @@ def write_exports(report, output):
         if not records: line('未提供记录。',10)
     line('额度为采样时快照，超过重置时间后当前剩余额度未知。',10)
     line('完整匿名明细见同批次 Excel 和 HTML。',10); line(data['privacy']['note'],10); pdf.save()
-    font_path=Path(os.environ.get('WINDIR','C:/Windows'))/'Fonts'/'msyh.ttc'
-    if not font_path.is_file(): raise RuntimeError('local Chinese font required')
     image=Image.new('RGB',(1400,980),'#F3F6FA'); draw=ImageDraw.Draw(image)
     font=ImageFont.truetype(str(font_path),28); heading=ImageFont.truetype(str(font_path),46)
     draw.text((70,50),'Codex 用量概览',font=heading,fill='#233D59')

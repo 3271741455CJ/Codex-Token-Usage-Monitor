@@ -72,3 +72,19 @@ The user's `.codex` data is external input, never part of this repository. A clo
 - `docs/INTERACTIVE_REPORTS.md`: use, dependencies, format scopes and security.
 - `tests/test_exports.py`, `tests/test_server.py`: synthetic export and local-origin/refresh regression checks.
 - `.reports/snapshot-*/`: private generated batches, never committed.
+
+## Desktop distribution / 桌面分发
+
+- `desktop.py`: standalone app/worker entry; default double-click opens the local report.
+- `codex_usage/updates.py`: strict stable-version comparison, bounded public GitHub check and update consent.
+- `codex_usage/runtime.py`: per-user output locations and fixed source/frozen worker commands.
+- `requirements-build.txt`: pinned direct build/export dependencies.
+- `build_tools/build.py`, `monitor.spec`: native bundles and Windows/macOS/Linux packaging, pinned build-time font source.
+- `build_tools/windows.iss`, `sign-windows.ps1`: current-user installer and optional verified Authenticode signing.
+- `build_tools/smoke.py`, `release_manifest.py`: standalone synthetic export and complete asset/checksum verification.
+- `.github/workflows/release.yml`: native tests/builds, artifacts, and tag-triggered complete Releases.
+- `tests/test_updates.py`: update consent/version/failure/network-boundary and runtime command checks.
+- `docs/INSTALLATION.md`, `WINDOWS_TRUST.md`, `RELEASE_NOTES.md`: install/update/signing and release notes.
+- `build/`, `dist/`, `release/`, generated `codex_usage/assets/ReportSansSC.ttf`: ignored build outputs, not private source inputs.
+
+User launch → separate public version check/consent → loopback service → fixed worker with update checks disabled → unchanged guarded collection/privacy exports. Installed output goes to a separate validated per-user directory; source output stays `.reports/`.

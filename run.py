@@ -9,29 +9,39 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from codex_usage.safety import checked_local_path, install_guard, validate_output
 
 
-def main():
+def main(argv=None):
     for stream in (sys.stdout,sys.stderr):
         if hasattr(stream,'reconfigure'): stream.reconfigure(encoding='utf-8',errors='replace')
     if sys.version_info < (3, 11):
         print('需要本机 Python 3.11 或以上版本；本程序不会下载安装任何依赖。',file=sys.stderr)
         return 1
-    parser=argparse.ArgumentParser(description='Codex 用量查看器（源文件只读、默认离线、Python 3.11+）')
+    from codex_usage.runtime import default_output
+    from codex_usage.updates import current_version
+    parser=argparse.ArgumentParser(description='Codex 用量查看器（源文件只读、本地采集、Python 3.11+）')
+    parser.add_argument('--version',action='version',version=current_version())
+    parser.add_argument('--no-update-check',action='store_true',help='跳过启动版本检查，完全离线启动')
     parser.add_argument('--codex-home',help='Codex 数据目录；默认 CODEX_HOME 或 ~/.codex')
-    parser.add_argument('--output',default=str(Path(__file__).parent/'.reports'),help='独立报告输出目录')
+    parser.add_argument('--output',default=str(default_output()),help='独立报告输出目录')
     parser.add_argument('--json',action='store_true',help='额外生成去标识的 usage.json；仅供本地使用')
     parser.add_argument('--all-formats',action='store_true',help='生成 Word、Excel、PDF 和 PNG/JPEG/WebP/SVG 概览；需要本机导出依赖')
     parser.add_argument('--serve',action='store_true',help='打开仅本机可访问的交互报告，支持更新整套文件')
     parser.add_argument('--sync-official',action='store_true',help='显式通过已安装官方客户端同步账号用量与额度；需要联网，不上传本地日志')
     parser.add_argument('--show-api-key',action='store_true',help='仅显示本地查看指引，不再输出 API Key 或其片段')
-    args=parser.parse_args()
+    args=parser.parse_args(argv)
     if args.sync_official and args.show_api_key:
         parser.error('--sync-official 不能与 --show-api-key 同时使用。')
+    if not args.no_update_check and not args.show_api_key:
+        from codex_usage.updates import startup_check
+        startup_check()
     try:
         home=checked_local_path(args.codex_home or os.environ.get('CODEX_HOME') or Path.home()/'.codex')
         protected=[Path.home()/'.codex']
         if os.name=='nt':
             protected += [Path(os.environ.get('LOCALAPPDATA',Path.home()))/'OpenAI'/'Codex',Path(os.environ.get('ProgramFiles','C:/Program Files'))/'WindowsApps']
         output=validate_output(Path(args.output),home,protected)
+        # Installed applications may live in read-only directories. Validate
+        # before creating the per-user output tree, never write into the app.
+        output.parent.mkdir(parents=True,exist_ok=True)
         if not home.is_dir(): raise ValueError('Codex 数据目录不存在；请用 --codex-home 指定本地目录。')
         if args.show_api_key and (args.serve or args.all_formats):
             raise ValueError('查看指引不能与服务模式组合。')

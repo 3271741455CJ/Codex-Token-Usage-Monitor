@@ -15,7 +15,7 @@ Local usage numbers, model identifiers, reasoning levels, timestamps, version nu
 
 **Sole credential transmission exception, explicitly authorized by the owner:** the necessary access token and account identifier may be supplied to the installed official Codex client solely for **OpenAI official authentication** in opt-in sync. They must never go to another destination, search query, telemetry service, report, error message or command-line argument. Refresh tokens are not used. See [official synchronization](docs/OFFICIAL_SYNC.md) for the checked execution boundary.
 
-联网不再被一概禁止：可以按报告需要获取信息，但任何请求、查询参数或上传内容都不得携带上述敏感信息，唯一凭据例外是用户已授权的 OpenAI 官方认证。当前实现仍默认离线，仅提供可选官方同步；本次没有新增通用爬虫或第三方接口。静态 HTML 保持离线；用户授权的本机交互页面仅访问同源更新接口。
+联网不再被一概禁止：可以按报告需要获取信息，但任何请求、查询参数或上传内容都不得携带上述敏感信息，唯一凭据例外是用户已授权的 OpenAI 官方认证。本地采集保持离线，并提供可选官方同步。用户于 2026-11-01 另行要求每次启动检查更新：启动器仅向固定的 `api.github.com/repos/3271741455CJ/Codex-Token-Usage-Monitor/releases/latest` 请求公开元数据，不读取或发送凭据、Codex 数据、Cookie、私人配置或路径，不继承代理。最多等待四秒，可用 `--no-update-check` 禁用；后台采集不检查版本。只有确认后才打开本仓库的 HTTPS 发布页，不自动执行下载内容。静态 HTML 保持离线；用户授权的本机交互页面仅访问同源更新接口。
 
 Codex's separate “modify only explicitly requested scope” rule belongs to [AGENTS.md](AGENTS.md) and [maintenance instructions](docs/MAINTENANCE.md); it is not a product runtime constraint.
 
@@ -23,7 +23,7 @@ Codex's separate “modify only explicitly requested scope” rule belongs to [A
 
 The collector is designed for local, read-only source inspection, offline by default. The owner explicitly authorized optional official account synchronization; see [its execution and credential boundary](docs/OFFICIAL_SYNC.md). It uses application-level network/write restrictions and restrictive HTML CSP. These protections are not an OS sandbox or a firewall for other apps. See the READMEs and `codex_usage/safety.py` for the boundary.
 
-No release-support schedule is established yet. Initial version 0.1.0 is a local, unpublished baseline; do not infer security guarantees for future versions from this document.
+No release-support schedule is established yet. Version 0.2.0 adds standalone distribution; do not infer security guarantees for future versions from this document.
 
 ## Reporting a vulnerability
 
@@ -45,3 +45,7 @@ Any change to authentication handling, file writes, SQLite access, output fields
 ## Authorized local report service
 
 The owner requested in-page refresh and multi-format exports on 2026-10-30. This authorizes a loopback-only service and fixed collector subprocesses; it does not authorize private uploads. See [the service boundary](docs/INTERACTIVE_REPORTS.md). Static reports retain network-disabled CSP. Live responses allow only same-origin refresh, require a random session path, exact Host and POST Origin/header checks, and never log request URLs or raw errors. All new document/image formats share the privacy output filter.
+
+## Build and distribution boundary
+
+The requested release workflow runs on clean GitHub-hosted builders with public source and synthetic fixtures only. Build-time dependency and pinned font-source downloads are separate from installed runtime behavior. No local reports, credentials, configuration, logs or databases are uploaded. Windows signing credentials, when configured, stay in runner secrets and temporary files removed after signing. Desktop bundles write reports to validated per-user data directories. See [installation](docs/INSTALLATION.md) and [Windows trust](docs/WINDOWS_TRUST.md).

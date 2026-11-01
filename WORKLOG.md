@@ -72,6 +72,14 @@ Version: **0.1.0**, initial local implementation. GitHub upload/release: **not p
 
 - Final local Markdown link, version and new private-export ignore checks passed.
 
+## 2026-11-01 — Desktop release and startup updates / 安装包与启动更新
+
+- Implemented bounded public stable-release checks, explicit update consent and offline/version flags; no private input is sent, and collector workers never check versions.
+- Added standalone dispatch, per-user output, desktop browser launch, bundled Chinese export font and native Windows/macOS/Linux packaging with clean-build CI and complete-release checksums.
+- Added Windows current-user installation, no-UPX one-folder builds, product metadata and optional verified Authenticode signing/timestamps; documented unsigned SmartScreen and macOS notarization limitations.
+- User redirected delivery to the original `3271741455CJ/Codex-Token-Usage-Monitor` repository. Its main matches the fork baseline; collaborator push access was verified without exposing credentials. Update/release links target the original repository.
+- Local Windows Python 3.13: 52 tests, 51 passed and one symlink-privilege skip; Node dashboard: 19 passed. Native bundles, installer and cross-platform CI validation are pending at this entry; no publication claimed yet.
+
 ## Before publishing / 发布前待办
 
 - [ ] Manually verify layout in a local browser using synthetic demo data.

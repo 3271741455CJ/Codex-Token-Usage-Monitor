@@ -2,17 +2,19 @@
 
 [English](README.md) | [简体中文](README-Simplified_Chinese.md)
 
-**当前版本：0.1.0，初始实现，尚未在 GitHub 发布。**
+**当前版本：0.2.0，支持独立安装包与启动更新检查。**
+
+从 [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases/latest) 下载 Windows、macOS（Intel/Apple Silicon）或 Linux（x64/ARM64）包。内置 Python、导出依赖及中文字体，安装后即可启动。每次启动检查本工具正式版，发现更新询问是否打开下载页；断网或拒绝仍可继续使用。详见[安装与更新](../docs/INSTALLATION.md)。
 
 这是独立开发的项目，不是 OpenAI 官方产品，也不代表 OpenAI。界面目前为简体中文；双语 README 仅表示提供双语说明，不表示界面支持语言切换。
 
 ## 环境要求
 
-- 主要支持和验证环境为 Windows；双击入口和桌面安装版本识别是 Windows 专用功能，其他平台尚未验证。
-- Python 3.11+；已有验证使用 Windows / Python 3.12 和 3.15。
+- 独立包面向 Windows 10/11 x64、macOS 13+ Intel/Apple Silicon、glibc Linux x64/ARM64。Windows Store 版本识别与官方同步仍仅限 Windows，具体系统基线见[安装说明](../docs/INSTALLATION.md)。
+- 源码运行需要 Python 3.11+；独立安装包内置 Python。
 - 本机浏览器和已有 Codex 数据。仅开发时的前端测试需要 Node.js，无须 npm 包。
 
-双击 **`查看Codex用量.cmd`**，自动扫描本机 Codex 数据并打开可交互的本地网页。静态离线采集使用 Python 标准库；交互导出需要本机已有的文档依赖，默认不访问互联网。可选的 `--sync-official` 通过已安装的官方客户端联网读取账号用量与额度，不上传本地日志。需要本机 Python 3.11+，Windows 自带浏览器即可查看报告。
+双击 **`查看Codex用量.cmd`**，自动扫描本机 Codex 数据并打开可交互的本地网页。静态离线采集使用 Python 标准库；源码交互导出需要本机已有的文档依赖；安装版已内置。启动器单独检查公开版本，本地采集不访问互联网。可选的 `--sync-official` 通过已安装的官方客户端联网读取账号用量与额度，不上传本地日志。源码方式需要本机 Python 3.11+，安装版无需另装。
 
 ## 使用
 
@@ -31,7 +33,7 @@ python -B -m unittest discover -s tests -v
 node .\tests\test_dashboard.cjs
 ```
 
-优先使用 `--codex-home`，其次 `CODEX_HOME` 环境变量，最后默认 `%USERPROFILE%\.codex`。默认输出位置是 `run.py` 同目录的 `.reports/`。输出目录的父目录应已存在，输出目录与受保护的数据或安装目录不能相互包含。网络映射盘、UNC、符号链接和 Windows 重解析点不支持。
+优先使用 `--codex-home`，其次 `CODEX_HOME` 环境变量，最后默认 `%USERPROFILE%\.codex`。源码输出为 `run.py` 同目录的 `.reports/`；安装版使用独立用户数据目录，见[安装说明](../docs/INSTALLATION.md)。输出父目录在路径验证后创建，输出目录与受保护的数据或安装目录不能相互包含。网络映射盘、UNC、符号链接和 Windows 重解析点不支持。
 
 | 参数 | 用途 |
 | --- | --- |
@@ -41,6 +43,8 @@ node .\tests\test_dashboard.cjs
 | `--json` | 额外生成 `usage.json`，与 HTML 使用相同隐私过滤；仍仅供本地使用 |
 | `--show-api-key` | 仅显示本地查看指引，不再打印 API Key 或任何片段 |
 | `--help` | 显示命令帮助 |
+| `--version` | 显示本工具版本，不联网检查 |
+| `--no-update-check` | 跳过启动版本检查和提示，完全离线启动 |
 
 只采集而不打开浏览器时，直接运行 `run.py`，或运行 `查看Codex用量.cmd --no-open`；`--no-open` 是启动脚本参数，不是 Python 参数。
 
@@ -83,7 +87,7 @@ python -I -S -B .\run.py --show-api-key
 - 报告保留匿名分组及用量、模型、时间、额度等统计，仍属于私人本地文件，不得上传或用于公开截图；`.reports/` 已从 Git 排除。
 - 上述是本程序的技术边界，不是整台电脑或浏览器的系统防火墙。不会修改 Windows 防火墙或其他应用的联网权限。浏览器自身的后台服务不受本项目控制，但报告没有传出数据的代码或外部资源。
 
-可按报告需要联网，但不得在请求中携带敏感信息；当前实现保持默认离线与可选官方同步，本次未新增通用爬虫。用户已明确允许的唯一凭据传输例外是：必要访问令牌及账号标识仅用于 OpenAI 官方认证，禁止发送至其他目的地或在报告中显示。
+可按报告需要联网，但不得在请求中携带敏感信息；采集器保持离线与可选官方同步。启动器单独向 `api.github.com` 请求公开版本元数据，不携带凭据、Codex 数据、Cookie、继承的代理或个人标识；启动最多等待四秒，后台刷新不重复检查。用户已明确允许的唯一凭据传输例外是：必要访问令牌及账号标识仅用于 OpenAI 官方认证，禁止发送至其他目的地或在报告中显示。
 
 若 Codex 正在写入日志，最后一行可能尚未完成，或数据库复制期间发生变化；报告会提示，稍后重新运行即可。程序不会为修复这种情况改动源文件。
 
@@ -113,4 +117,8 @@ python -I -S -B .\run.py --show-api-key
 
 格式选择支持 Word/PDF 汇总报告、Excel 完整匿名数据、PNG/JPEG/WebP/SVG 概览图片，以及原有 CSV 筛选明细。新增格式导出整份快照，不跟随页面筛选。每批文件在本地 `snapshot-*` 目录中；成功更新后页面筛选重置。
 
-导出依赖本机已有 python-docx、openpyxl、Pillow、reportlab 及 Windows 微软雅黑字体；启动脚本优先使用已有 Codex 工作区 Python，否则使用 PATH Python，不会下载安装。命令为 `python -I -B run.py --serve` 或 `--all-formats --json`，导出模式勿加 `-S`。普通 CLI 与 `--no-open` 仍保留静态采集。详见[交互报告说明](../docs/INTERACTIVE_REPORTS.md)。
+独立安装包内置 python-docx、openpyxl、Pillow、reportlab 和 Report Sans SC 中文字体（基于 Noto Sans SC，SIL OFL 许可）。源码运行需要自行准备依赖与中文 TrueType 字体，构建时可用 `python build_tools/build.py --prepare-only` 准备内置字体；启动脚本优先使用已有 Codex 工作区 Python，否则使用 PATH Python，不会下载安装。命令为 `python -I -B run.py --serve` 或 `--all-formats --json`，导出模式勿加 `-S`。普通 CLI 与 `--no-open` 仍保留静态采集。详见[交互报告说明](../docs/INTERACTIVE_REPORTS.md)。
+
+## 发布与签名
+
+已配置原生构建与测试以及版本标签触发的 Release 工作流；实际发布版本以 [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases) 为准。Windows 支持可信签名与时间戳，未签名或全新下载仍可能出现 SmartScreen 提示；macOS 包未公证。详见 [Windows 分发说明](../docs/WINDOWS_TRUST.md) 与[验证记录](../docs/VERIFICATION.md)。

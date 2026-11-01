@@ -17,7 +17,7 @@ Codex must follow the explicit-scope/minimal-change rule in [AGENTS.md](AGENTS.m
    python -B .\tests\make_demo.py
    ```
 
-   Python 3.11+ is needed for the collector/tests; Node is only needed for frontend tests. No package installation is required. The demo output is `.qa/demo.html`.
+   Python 3.11+ is needed for the collector/tests; Node is only needed for frontend tests. Static collector tests need no dependencies; full export/build checks require `python -m pip install -r requirements-build.txt` and `python build_tools/build.py --prepare-only` at build time. The demo output is `.qa/demo.html`.
 5. Update both READMEs when shared facts change, the work log, and other files required by the maintenance matrix. Record any failures or skipped tests.
 6. Review `git diff` and `git diff --cached` before committing. Submit a PR explaining the problem, resulting behavior, verification and limitations.
 

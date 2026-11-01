@@ -9,18 +9,14 @@ import sys
 import uuid
 from .exports import FILES
 from .safety import checked_local_path
+from .runtime import collector_command
 
 ALLOWED = {'latest.html', 'usage.json', *FILES}
 
 def collect(home, output, official=False):
     folder=checked_local_path(output/('snapshot-'+uuid.uuid4().hex))
     folder.mkdir()
-    command=[sys.executable,'-I','-S','-B',str(Path(__file__).resolve().parents[1]/'run.py'),
-             '--codex-home',str(home),'--output',str(folder),'--all-formats','--json']
-    # Site packages are required by the export libraries; isolated mode still
-    # ignores PYTHONPATH/user site. Do not pass credentials in argv/environment.
-    command.remove('-S')
-    if official: command.append('--sync-official')
+    command=collector_command(home,folder,official)
     result=subprocess.run(command,stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,
                           stderr=subprocess.DEVNULL,timeout=300,
                           creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
@@ -85,7 +81,8 @@ def make_server(home, output, official=False, collector=collect):
 
 def serve(home, output, official=False):
     server=make_server(home,output,official)
-    if os.name=='nt': os.startfile(server.local_url)
+    import webbrowser
+    webbrowser.open(server.local_url)
     print('本机交互报告已启动；关闭此窗口将停止页面更新。')
     try: server.serve_forever()
     except KeyboardInterrupt: pass

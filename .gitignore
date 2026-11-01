@@ -3,6 +3,13 @@
 __pycache__/
 *.pyc
 .venv/
+build/
+dist/
+release/
+codex_usage/assets/ReportSansSC.ttf
+*.pfx
+*.p12
+*.cer
 *.lnk
 
 # Credentials and private Codex source data: never publish real copies.

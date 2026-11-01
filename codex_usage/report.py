@@ -129,7 +129,7 @@ def render_html(report: dict) -> str:
 
 
 def _render_html(report: dict) -> str:
-    template=Path(__file__).with_name('dashboard.html').read_text(encoding='utf-8')
+    template=Path(__file__).with_name('dashboard.html').resolve().read_text(encoding='utf-8')
     serialized=json.dumps(report,ensure_ascii=False,separators=(',',':')).replace('&','\\u0026').replace('<','\\u003c').replace('>','\\u003e').replace('\u2028','\\u2028').replace('\u2029','\\u2029')
     html=template.replace('__REPORT_DATA__',serialized)
     scripts=re.findall(r'<script\b[^>]*>(.*?)</script\s*>',html,re.S|re.I)
