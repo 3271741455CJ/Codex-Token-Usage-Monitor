@@ -26,9 +26,11 @@ UninstallDisplayIcon={app}\Codex-Token-Usage-Monitor.exe
 CloseApplications=yes
 RestartApplications=no
 SetupLogging=no
-SignedUninstaller=yes
 #ifdef SigningEnabled
+SignedUninstaller=yes
 SignTool=release_sign
+#else
+SignedUninstaller=no
 #endif
 
 [Files]

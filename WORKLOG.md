@@ -80,6 +80,13 @@ Version: **0.1.0**, initial local implementation. GitHub upload/release: **not p
 - User redirected delivery to the original `3271741455CJ/Codex-Token-Usage-Monitor` repository. Its main matches the fork baseline; collaborator push access was verified without exposing credentials. Update/release links target the original repository.
 - Local Windows Python 3.13: 52 tests, 51 passed and one symlink-privilege skip; Node dashboard: 19 passed. Native bundles, installer and cross-platform CI validation are pending at this entry; no publication claimed yet.
 
+## 2026-11-02 — Standalone Windows verification / Windows 独立程序验证
+
+- Built the no-UPX one-folder Windows application with bundled Python 3.13.14, export libraries and the pinned OFL Chinese font. The real frozen guarded worker generated all nine output files from synthetic data; source content/mtime remained unchanged and private fixture values were excluded.
+- Re-ran the 52 Python tests: 51 passed, one symlink-privilege skip; all 19 Node dashboard tests passed. A local Microsoft Defender custom scan of the built application reported zero detections. This does not prove SmartScreen download reputation, code signing or clean behavior on every machine.
+- Corrected unsigned installer handling so SignedUninstaller is enabled only when its signing backend is configured; clarified installed-app output guidance.
+- GitHub rejected the original-repository branch push because the existing PAT lacks workflow scope. No implementation commit, tag or Release has been published remotely yet. Browser submission also stopped because the UI tool could not confidently determine the browser URL. User chose to add workflow permission; publication awaits that change and native CI results.
+
 ## Before publishing / 发布前待办
 
 - [ ] Manually verify layout in a local browser using synthetic demo data.

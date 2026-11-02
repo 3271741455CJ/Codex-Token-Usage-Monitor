@@ -81,7 +81,7 @@ def main(argv=None):
         if args.all_formats:
             from codex_usage.exports import write_exports
             write_exports(report,output)
-        print('完成。请在所选输出目录打开 latest.html；默认输出目录是项目内的 .reports。')
+        print('完成。请在所选输出目录打开 latest.html；安装版默认保存在用户数据目录，源码版为项目内的 .reports。')
         print('报告仅供本机使用；敏感原文请按页面指引自行查看本地源文件。')
         return 0
     except Exception as exc:

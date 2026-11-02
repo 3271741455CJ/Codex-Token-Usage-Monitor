@@ -1,5 +1,13 @@
 # 验证记录
 
+## 2026-11-02 — Windows 独立程序与 Defender 检查
+
+- Windows / Python 3.13.14：实际 PyInstaller 目录式、无 UPX 独立程序构建成功，内置 Python、导出库及固定来源派生的中文 TrueType 字体。
+- 独立可执行文件的受限工作进程从合成输入生成全部 9 个 HTML/JSON/文档/图片文件；源内容与修改时间未变，HTML 未包含合成私人原文。
+- 完整 Python 测试 52 项：51 通过、1 项 Windows 符号链接权限跳过；Node 前端 19 项通过。
+- 本机 Microsoft Defender 对构建目录执行自定义扫描，扫描期间该目录的检测记录数为 0。此结果不代表 SmartScreen 下载信誉、可信签名或跨机器绝对无误报。
+- 安装器和其他系统原生构建尚未验证；GitHub 当前凭据缺少 workflow 权限，推送被拒，尚无已发布 Release。
+
 ## 2026-11-01 — 启动更新与独立安装包（本地候选检查）
 
 - Windows / Python 3.13.14 隔离环境：52 项 Python 测试，51 通过，1 项 Windows 符号链接权限跳过；Node 前端 19 项通过。
