@@ -1,5 +1,12 @@
 # 验证记录
 
+## 2026-11-02 — 正式 Release 与在线更新入口核对
+
+- [标签运行 41378006761](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/actions/runs/41378006761) 五个平台及 publish 均成功；[v0.2.0](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases/tag/v0.2.0) 已公开，非草稿、非预发布。
+- 核对 8 个原生安装/便携包、5 个依赖清单及 SHA256SUMS.txt，共 14 个附件；公开下载的清单包含 13 条文件哈希，与 GitHub 的已上传附件 digest 全部一致。
+- 使用程序自身 `fetch_release`/`parse_release` 请求真实公开 latest API：0.1.0 正确识别 0.2.0 与对应 Windows 安装包，0.2.0 不产生升级提示。未调用 GUI 确认、执行安装器或访问真实账号数据。
+- 发布二进制所对应标签为合并提交 10f526a187f8897c07afbabba35a0c14d7280ddd；最终交接报告补记仅修改文档。Windows 仍为未签名构建，未以完整性校验或本机候选扫描代替 SmartScreen 信誉验证。
+
 ## 2026-11-02 — 五平台原生候选验收
 
 - [运行 41376896912](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/actions/runs/41376896912)，实现提交 `d492f26`：Windows x64、macOS Intel、macOS ARM64、Linux x64、Linux ARM64 全部成功。

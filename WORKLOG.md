@@ -100,13 +100,20 @@ The second native run passed macOS source regressions but the frozen app hit PyI
 - [x] Run candidate native CI on all five targets; run 41376896912 passed, including frozen worker and Windows install/uninstall checks.
 - [x] Confirm the original public repository and existing MIT license; no new license choice was made.
 - [x] Review explicit source/docs staging; no private reports, credentials, logs or local QA artifacts uploaded.
-- [ ] Merge reviewed source and publish the matching tag/Release; record final public assets and API checks after success.
+- [x] Merge reviewed source and publish the matching tag/Release; see the completed publication record below.
 
 ## 2026-11-02 — Candidate acceptance and handoff / 候选验收与交接
 
 - Candidate d492f26 passed all five native targets in run 41376896912. The new internal bundle resource/link-boundary tests ran on native CI; Windows and macOS ARM64 recorded all 53 Python tests passing, and each target ran the 19 Node tests and real standalone export checks.
 - Used a synthetic-only loopback server and a separate Playwright Edge session to inspect overview/history at 1440×1000. Screenshots were viewed; console reported no errors/warnings. No private live report was opened or uploaded.
 - Added docs/DELIVERY_REPORT.md with delivery status, implementation map, safety boundaries, actual validation, release/development commands and signing/notarization/platform follow-ups. Added README/file-guide links and corrected old changelog/status wording. Local links and version consistency passed. Formal publication is still pending at this entry.
+
+## 2026-11-02 — v0.2.0 published / 正式发布与交接完成
+
+- PR #1 merged to the original repository as 10f526a187f8897c07afbabba35a0c14d7280ddd; annotated tag v0.2.0 was pushed to that commit. No published tag or binary was rewritten.
+- Release run 41378006761 completed all five native build/test jobs and publication successfully. The public v0.2.0 Release has eight native packages, five dependency inventories and SHA256SUMS.txt.
+- Downloaded the public checksum manifest and matched all 13 file hashes to GitHub's uploaded asset digests. Verified the real public startup-check path detects 0.2.0 for 0.1.0 and returns no update for 0.2.0.
+- Completed the development handoff report with merge/release/CI evidence, implementation/development/release instructions and explicit remaining signing/notarization/platform limitations. Superseded duplicate CI runs were canceled; the final tag run remains complete and green. This final documentation update does not change the release binaries.
 
 ## Entry format / 后续记录格式
 

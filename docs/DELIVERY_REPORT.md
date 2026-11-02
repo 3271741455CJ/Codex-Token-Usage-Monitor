@@ -6,7 +6,7 @@
 
 - 目标原仓库：[3271741455CJ/Codex-Token-Usage-Monitor](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor)。本次成果提交在原仓库，不以个人 fork 作为更新源。
 - 实现分支：`codex/startup-updates-and-releases`。实现候选 `d492f26` 已通过[五平台原生 CI](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/actions/runs/41376896912)。
-- 当前进度：功能、原生构建及候选验收完成；正在完成合并和 v0.2.0 正式发布。正式发布结果将补充到本文“发布完成记录”，不能把候选测试通过等同于 Release 已上线。
+- 当前进度：本次功能、原生构建、验收与正式发布均已完成；[PR #1](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/pull/1) 已合并，[v0.2.0 Release](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases/tag/v0.2.0) 已公开。可信签名与 Apple 公证等需发布者身份条件的后续工作明确列在本文末尾。
 - 版本唯一来源：[VERSION](../VERSION)；用户更新入口：[Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases/latest)。
 
 | 工作项 | 当前结果 |
@@ -20,7 +20,7 @@
 | 隐私、只读、网络和本机服务边界 | 保留并增加包内资源回归检查 |
 | Windows 可信代码签名 | 后端和校验流程已接入，当前构建为未签名 |
 | Apple Developer ID 公证 | 未配置，后续工作 |
-| 正式 Release、下载附件与更新接口核对 | 发布阶段进行中，完成后补记 |
+| 正式 Release、下载附件与更新接口核对 | 已发布；14 个附件与公开更新接口核对通过 |
 
 ## 本次具体实现
 
@@ -113,4 +113,9 @@ macOS 测试临时目录应是没有符号链接的真实路径；CI 使用 runn
 
 ## 发布完成记录
 
-待正式发布后补充 Release、合并提交与最终核对结果。
+- 完成日期：2026-11-02（Asia/Shanghai）。[PR #1](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/pull/1) 已合并，发布标签 `v0.2.0` 指向合并提交 `10f526a187f8897c07afbabba35a0c14d7280ddd`。
+- [正式发布运行 41378006761](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/actions/runs/41378006761)：五个平台原生任务及 publish 全部成功。
+- [公开 Release](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases/tag/v0.2.0) 包含 8 个安装/便携包、5 个依赖版本清单和 SHA256SUMS.txt，共 14 个附件。
+- 从公开下载地址取得 SHA256SUMS.txt，将其中 13 条校验值逐项与 GitHub 已上传附件的 SHA-256 digest 对照，全部一致；正式 Release 非草稿、非预发布。
+- 用程序自身的无认证公开请求与版本比较路径验证：安装版本 0.1.0 能识别 0.2.0 并找到 Windows 安装包；安装版本 0.2.0 不提示更新。未在该检查中下载执行更新内容或访问真实 Codex 数据。
+- 为避免重复消耗构建资源，已取消同一代码的文档/PR/main 重复任务；正式标签运行完整保留并成功。发布后的本报告补记属于文档变更，不改变已发布二进制或移动标签。

@@ -7,7 +7,7 @@ Versions use `MAJOR.MINOR.PATCH`; tags use `vMAJOR.MINOR.PATCH`. A heading is no
 
 ## 0.2.0 — Desktop distribution / 桌面分发
 
-Publication is evidenced by the matching GitHub Release, not this heading.
+Published on 2026-11-02: [v0.2.0](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases/tag/v0.2.0).
 
 - Added bounded startup checks against public stable GitHub Releases, update consent, `--no-update-check` and `--version`; local refresh workers never prompt.
 - Added native standalone Windows installer/portable ZIP, macOS Intel/Apple Silicon DMGs and Linux x64/ARM64 DEB/tar.gz, bundled Python/export dependencies and an OFL Chinese font.
