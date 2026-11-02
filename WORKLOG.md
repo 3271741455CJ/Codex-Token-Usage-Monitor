@@ -96,11 +96,17 @@ The second native run passed macOS source regressions but the frozen app hit PyI
 
 ## Before publishing / 发布前待办
 
-- [ ] Manually verify layout in a local browser using synthetic demo data.
-- [ ] Rerun applicable tests against the final release candidate and record the results.
-- [ ] Decide repository visibility and license; add license text only after an explicit owner choice.
-- [ ] Review staged files for private reports, credentials and local paths.
-- [ ] Create the GitHub repository, push reviewed source, and create a tag/release when ready.
+- [x] Inspect synthetic overview/history pages in a real browser; see 2026-11-02 verification scope.
+- [x] Run candidate native CI on all five targets; run 41376896912 passed, including frozen worker and Windows install/uninstall checks.
+- [x] Confirm the original public repository and existing MIT license; no new license choice was made.
+- [x] Review explicit source/docs staging; no private reports, credentials, logs or local QA artifacts uploaded.
+- [ ] Merge reviewed source and publish the matching tag/Release; record final public assets and API checks after success.
+
+## 2026-11-02 — Candidate acceptance and handoff / 候选验收与交接
+
+- Candidate d492f26 passed all five native targets in run 41376896912. The new internal bundle resource/link-boundary tests ran on native CI; Windows and macOS ARM64 recorded all 53 Python tests passing, and each target ran the 19 Node tests and real standalone export checks.
+- Used a synthetic-only loopback server and a separate Playwright Edge session to inspect overview/history at 1440×1000. Screenshots were viewed; console reported no errors/warnings. No private live report was opened or uploaded.
+- Added docs/DELIVERY_REPORT.md with delivery status, implementation map, safety boundaries, actual validation, release/development commands and signing/notarization/platform follow-ups. Added README/file-guide links and corrected old changelog/status wording. Local links and version consistency passed. Formal publication is still pending at this entry.
 
 ## Entry format / 后续记录格式
 

@@ -86,6 +86,7 @@ The user's `.codex` data is external input, never part of this repository. A clo
 - `tests/test_updates.py`: update consent/version/failure/network-boundary and runtime command checks.
 - `tests/test_bundle_resources.py`: internal packaged resource reads, rejected external links/writes and unchanged source-path link checks.
 - `docs/INSTALLATION.md`, `WINDOWS_TRUST.md`, `RELEASE_NOTES.md`: install/update/signing and release notes.
+- `docs/DELIVERY_REPORT.md`: delivery progress, implementation map, validation evidence, release procedure and development handoff.
 - `build/`, `dist/`, `release/`, generated `codex_usage/assets/ReportSansSC.ttf`: ignored build outputs, not private source inputs.
 
 User launch → separate public version check/consent → loopback service → fixed worker with update checks disabled → unchanged guarded collection/privacy exports. Installed output goes to a separate validated per-user directory; source output stays `.reports/`.

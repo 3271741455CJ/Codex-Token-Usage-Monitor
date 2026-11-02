@@ -1,5 +1,14 @@
 # 验证记录
 
+## 2026-11-02 — 五平台原生候选验收
+
+- [运行 41376896912](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/actions/runs/41376896912)，实现提交 `d492f26`：Windows x64、macOS Intel、macOS ARM64、Linux x64、Linux ARM64 全部成功。
+- 各平台执行 53 项 Python 合成测试与 19 项 Node 前端测试；原生运行包含符号链接测试，本机 Windows 受权限影响跳过的两项不作为云端跳过处理。Windows 与 macOS ARM64 日志明确记录 53 项全部通过。
+- 各平台打包后的真实独立工作进程均生成 9 个文件并核验源内容/修改时间不变及私人字段不进入 HTML。Windows 另执行安装、已安装程序导出与卸载检查。
+- macOS 首轮暴露 `/var` 临时目录链接，后续独立包暴露 Frameworks/Resources 内置资源链接。现已采用真实测试临时目录及限定在运行应用包内部的只读资源例外；越界链接、写入和显式源路径链接仍被拒绝，新增回归检查通过。
+- Playwright CLI 使用独立 Edge 浏览器会话访问仅提供合成 demo 的回环 HTTP 页面，在 1440×1000 检查总览、历史列表及导航；已查看截图，未见主要文字/控件裁切，控制台记录 0 errors / 0 warnings。未使用真实账号或报告，未主张覆盖所有分辨率或验证官方网页一致性。
+- Markdown 本地链接与 VERSION/双语 README 一致性检查通过。Windows 云端构建日志明确标记 UNSIGNED；签名后端尚无可信证书实测，macOS 未进行 Developer ID 公证。
+
 ## 2026-11-02 — Windows 独立程序与 Defender 检查
 
 - Windows / Python 3.13.14：实际 PyInstaller 目录式、无 UPX 独立程序构建成功，内置 Python、导出库及固定来源派生的中文 TrueType 字体。

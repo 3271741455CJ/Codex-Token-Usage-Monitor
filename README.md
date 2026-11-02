@@ -13,6 +13,7 @@ A local dashboard for inspecting Codex usage records, with startup update checks
 - [File guide / 文件说明](docs/FILE_GUIDE.md)
 - [Changelog / 版本变更](CHANGELOG.md)
 - [Work log / 工作记录](WORKLOG.md)
+- [Delivery and development handoff / 工作进度与开发交接报告](docs/DELIVERY_REPORT.md)
 
 Windows quick start: double-click `查看Codex用量.cmd` for local interactive refresh and Word/Excel/PDF/image exports; see [requirements and format scopes](docs/INTERACTIVE_REPORTS.md).
 The generated `.reports/latest.html` uses anonymous references and local viewing guides for sensitive originals; usage statistics remain private local output. See the foremost [confidentiality rule](SECURITY.md).

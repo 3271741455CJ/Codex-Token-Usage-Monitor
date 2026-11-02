@@ -109,7 +109,7 @@ python -I -S -B .\run.py --show-api-key
 
 ## 当前状态与许可
 
-已配置原生构建与测试 CI，并通过版本标签触发完整 Release；实际已发布版本以 [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases) 为准。浏览器排版验收仍未完成，DOM 测试不能代替视觉检查。项目采用 [MIT 许可证](../LICENSE)。
+已配置原生构建与测试 CI，并通过版本标签触发完整 Release；实际已发布版本以 [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases) 为准。2026-11-02 已在 1440×1000 浏览器窗口检查合成总览与历史页，并非所有设备的全面视觉验收。详见[验证记录](../docs/VERIFICATION.md)与[开发交接报告](../docs/DELIVERY_REPORT.md)。项目采用 [MIT 许可证](../LICENSE)。
 
 ## 交互更新与多格式导出
 

@@ -25,10 +25,10 @@ Publication is evidenced by the matching GitHub Release, not this heading.
 
 - Made confidentiality the foremost product constraint in `SECURITY.md`; separately documented Codex's explicit-scope/minimal-change rule in `AGENTS.md` and contributor instructions. Networking is permitted for required report data under that confidentiality boundary; only necessary credentials/account ID may be used for OpenAI official authentication.
 - Removed sensitive originals and credential fragments from HTML/embedded JSON, JSON exports, CSV and CLI output. Identity/private configuration now have local viewing guides; sessions, turns, projects and sources use report-local anonymous references without a saved mapping. Usage accounting and the official synchronization protocol are unchanged.
-- Compatibility change: exports no longer contain original identity/title/path/ID fields; `--show-api-key` now prints only a local viewing guide. Existing copies saved elsewhere are not automatically rewritten. Version remains 0.1.0, unreleased.
+- Compatibility change: exports no longer contain original identity/title/path/ID fields; `--show-api-key` now prints only a local viewing guide. Existing copies saved elsewhere are not automatically rewritten.
 - Added opt-in `--sync-official` through the installed Windows official Codex app-server, with isolated in-memory authentication, no credential refresh, allowlisted account summaries/daily buckets/limits, and explicit failure states.
 - Added a separate official account dashboard with daily visualization and quota bars. Official totals never add to local totals or change with local filters; missing remote details remain unavailable.
-- Default operation and generated HTML remain offline. This feature is unreleased; live website parity is not established.
+- Guarded collection and saved HTML remain offline. Live website parity is not established.
 
 ## 0.1.0 — Initial baseline / 初始版本（尚未发布）
 

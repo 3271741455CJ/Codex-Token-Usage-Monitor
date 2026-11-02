@@ -111,7 +111,7 @@ The demo uses synthetic data and writes `.qa/demo.html`. Tests need no internet.
 
 ## Status and license
 
-The first local implementation is available. Automatic visual acceptance remains outstanding because the available embedded browser rejected `file://` previews. Native CI builds and tag-triggered Releases are configured. Actual published versions are listed on [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases). The project is licensed under the [MIT License](../LICENSE).
+Native CI builds and tag-triggered Releases are configured. Actual published versions are listed on [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases). A synthetic overview/history browser check at 1440×1000 passed on 2026-11-02; this is not exhaustive visual acceptance across devices. See [verification](../docs/VERIFICATION.md) and the [development handoff](../docs/DELIVERY_REPORT.md). The project is licensed under the [MIT License](../LICENSE).
 
 ## Interactive refresh and document exports
 
