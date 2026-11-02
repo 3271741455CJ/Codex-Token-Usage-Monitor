@@ -77,6 +77,7 @@ System credential stores, authentication commands, remote hosts and WSL-internal
 - Sources are read-only. SQLite connects only to a temporary copy of the database and WAL/SHM; temporary copies are removed after use.
 - A Python audit hook blocks socket/DNS/HTTP activity, arbitrary subprocesses and writes outside the report directory. Official sync permits exactly one preconfigured official stdio child; the native child is a separate trust boundary. Reparse points and writes through multiply linked files are rejected.
 - The standalone HTML has a restrictive CSP, hash-authorized scripts and no remote assets or network connections.
+- Frozen-app resource reads can follow internal bundle links only when both paths remain inside the executable bundle; external targets and all bundle writes remain blocked. User source/data/output checks continue to reject links.
 - Confidentiality is the foremost [product rule](../SECURITY.md). Credentials and fragments, identities, private URLs/configuration, original session/project titles and IDs, paths, conversations and tool/log contents are excluded from HTML (including embedded data), JSON, CSV and terminal output. Reports provide local viewing guides instead.
 - Sessions, turns, projects and sources use report-local anonymous numbers; no original-value map is saved. Usage/model/time/quota statistics remain available but private. Keep reports, CSV exports and real logs out of GitHub, issues and screenshots.
 

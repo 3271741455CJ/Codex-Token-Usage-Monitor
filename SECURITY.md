@@ -49,3 +49,5 @@ The owner requested in-page refresh and multi-format exports on 2026-10-30. This
 ## Build and distribution boundary
 
 The requested release workflow runs on clean GitHub-hosted builders with public source and synthetic fixtures only. Build-time dependency and pinned font-source downloads are separate from installed runtime behavior. No local reports, credentials, configuration, logs or databases are uploaded. Windows signing credentials, when configured, stay in runner secrets and temporary files removed after signing. Desktop bundles write reports to validated per-user data directories. See [installation](docs/INSTALLATION.md) and [Windows trust](docs/WINDOWS_TRUST.md).
+
+Frozen macOS apps use PyInstaller's internal Frameworks/Resources links for templates and libraries. The audit hook permits only read-only opens whose original and resolved paths both remain inside the running executable's bundle. Links escaping that bundle and all bundle writes remain blocked. Explicit source/data/output path checks still reject symlinks, including links inside the app when presented as user input. This exception is for packaged runtime resources, not Codex source data.

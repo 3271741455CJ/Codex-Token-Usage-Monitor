@@ -92,6 +92,8 @@ Version: **0.1.0**, initial local implementation. GitHub upload/release: **not p
 - User added workflow scope; implementation and workflow commits were pushed to the original repository's feature branch. Run 41376083373 passed Windows build/install/uninstall and Linux ARM64 native packaging; macOS tests exposed the system `/var` temporary-directory symlink, correctly rejected by the unchanged source guard.
 - Moved synthetic CI fixtures into the runner's real temporary directory and canonicalized the build smoke test's own temporary root. Source symlinks remain rejected; no runtime guard was relaxed. Native macOS revalidation remains required. Corrected the Chinese README's old CI-status sentence.
 
+The second native run passed macOS source regressions but the frozen app hit PyInstaller's internal resource links. Added a narrowly bounded read-only bundle resource exception: both lexical and resolved paths must remain inside the executable bundle. Source checks, external links and writes remain protected. Added synthetic regression coverage; native frozen-app revalidation is pending.
+
 ## Before publishing / 发布前待办
 
 - [ ] Manually verify layout in a local browser using synthetic demo data.

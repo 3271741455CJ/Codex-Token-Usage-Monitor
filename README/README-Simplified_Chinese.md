@@ -121,4 +121,6 @@ python -I -S -B .\run.py --show-api-key
 
 ## 发布与签名
 
+独立应用读取内置模板/库时，仅允许原路径和解析后的路径都留在本应用包内的只读资源链接；越出应用包的链接与包内写入仍禁止。用户指定的源数据和输出路径仍禁止符号链接。
+
 已配置原生构建与测试以及版本标签触发的 Release 工作流；实际发布版本以 [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases) 为准。Windows 支持可信签名与时间戳，未签名或全新下载仍可能出现 SmartScreen 提示；macOS 包未公证。详见 [Windows 分发说明](../docs/WINDOWS_TRUST.md) 与[验证记录](../docs/VERIFICATION.md)。

@@ -84,6 +84,7 @@ The user's `.codex` data is external input, never part of this repository. A clo
 - `build_tools/smoke.py`, `release_manifest.py`: standalone synthetic export and complete asset/checksum verification.
 - `.github/workflows/release.yml`: native tests/builds, artifacts, and tag-triggered complete Releases.
 - `tests/test_updates.py`: update consent/version/failure/network-boundary and runtime command checks.
+- `tests/test_bundle_resources.py`: internal packaged resource reads, rejected external links/writes and unchanged source-path link checks.
 - `docs/INSTALLATION.md`, `WINDOWS_TRUST.md`, `RELEASE_NOTES.md`: install/update/signing and release notes.
 - `build/`, `dist/`, `release/`, generated `codex_usage/assets/ReportSansSC.ttf`: ignored build outputs, not private source inputs.
 
