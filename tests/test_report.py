@@ -73,7 +73,7 @@ class ReportTests(unittest.TestCase):
             (home/'sessions'/'rollout.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in rows),encoding='utf-8')
             before = fingerprints(home)
             repository = Path(__file__).resolve().parents[1]
-            process = subprocess.run([sys.executable,'-B',str(repository/'run.py'),'--codex-home',str(home),'--output',str(output),'--json'],cwd=repository,capture_output=True,text=True,encoding='utf-8',errors='replace')
+            process = subprocess.run([sys.executable,'-B',str(repository/'run.py'),'--no-update-check','--codex-home',str(home),'--output',str(output),'--json'],cwd=repository,capture_output=True,text=True,encoding='utf-8',errors='replace')
             self.assertEqual(process.returncode,0,process.stderr)
             self.assertEqual(before,fingerprints(home))
             report=json.loads((output/'usage.json').read_text(encoding='utf-8'))
@@ -96,7 +96,7 @@ class ReportTests(unittest.TestCase):
             home.mkdir()
             (home/'auth.json').write_text('{"OPENAI_API_KEY":"sk-PRIVATE-KEY-END9876"}', encoding='utf-8')
             repository = Path(__file__).resolve().parents[1]
-            command = [sys.executable, '-B', str(repository/'run.py'), '--codex-home', str(home), '--output', str(root/'out')]
+            command = [sys.executable, '-B', str(repository/'run.py'), '--no-update-check', '--codex-home', str(home), '--output', str(root/'out')]
             process = subprocess.run(command+['--show-api-key'], capture_output=True, text=True, encoding='utf-8')
             self.assertEqual(process.returncode, 0, process.stderr)
             self.assertIn('自行查看', process.stdout)

@@ -47,6 +47,16 @@ def install_guard(output: Path, *, official_launch: dict | None = None):
     This is defense in depth for Python, not an OS sandbox for the native child.
     """
     root = checked_local_path(output)
+    # PyInstaller's macOS app layout links packaged data between Frameworks
+    # and Resources. Trust only read-only files whose lexical AND resolved
+    # locations stay inside this executable's bundle. Source path validation
+    # still rejects links, and writes never receive this exception.
+    bundle_root = None
+    if getattr(sys, 'frozen', False) and getattr(sys, '_MEIPASS', None):
+        runtime = Path(sys._MEIPASS).resolve()
+        if sys.platform == 'darwin' and runtime.name == 'Frameworks' and runtime.parent.name == 'Contents':
+            runtime = runtime.parent
+        bundle_root = runtime
     sys.dont_write_bytecode = True
     launching = False
     launched = False
@@ -101,8 +111,14 @@ def install_guard(output: Path, *, official_launch: dict | None = None):
                 if filename not in (0, 1, 2):
                     raise PermissionError('禁止访问任意文件描述符。')
                 return
+            writing = (isinstance(mode, str) and any(x in mode for x in 'wax+')) or (isinstance(flags, int) and flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND))
+            if bundle_root is not None and not writing:
+                resource = Path(os.path.abspath(os.fsdecode(filename)))
+                if inside(resource, bundle_root) and inside(resource.resolve(), bundle_root):
+                    checked_local_path(resource.resolve())
+                    return
             checked_local_path(os.fsdecode(filename))
-            if (isinstance(mode, str) and any(x in mode for x in 'wax+')) or (isinstance(flags, int) and flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND)):
+            if writing:
                 writable(filename)
         elif event in ('os.remove', 'os.rmdir', 'os.mkdir', 'os.chmod', 'os.utime', 'os.truncate'):
             writable(args[0])

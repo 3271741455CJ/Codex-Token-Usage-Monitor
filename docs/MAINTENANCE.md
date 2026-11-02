@@ -35,4 +35,4 @@ Changes must update their affected documentation in the **same commit or pull re
 5. Keep known limitations and work-log pending tasks until there is evidence they are resolved.
 6. Before release, follow [RELEASING.md](RELEASING.md).
 
-These are contributor/reviewer rules, not an installed automatic enforcement service. There is no cloud CI or automatic documentation synchronizer in this initial version.
+These are contributor/reviewer rules, not an installed automatic enforcement service. Native build/test and release CI is defined in `.github/workflows/release.yml`; documentation still requires contributor synchronization.

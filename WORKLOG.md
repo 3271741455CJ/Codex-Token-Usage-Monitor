@@ -72,13 +72,41 @@ Version: **0.1.0**, initial local implementation. GitHub upload/release: **not p
 
 - Final local Markdown link, version and new private-export ignore checks passed.
 
+## 2026-11-01 — Desktop release and startup updates / 安装包与启动更新
+
+- Implemented bounded public stable-release checks, explicit update consent and offline/version flags; no private input is sent, and collector workers never check versions.
+- Added standalone dispatch, per-user output, desktop browser launch, bundled Chinese export font and native Windows/macOS/Linux packaging with clean-build CI and complete-release checksums.
+- Added Windows current-user installation, no-UPX one-folder builds, product metadata and optional verified Authenticode signing/timestamps; documented unsigned SmartScreen and macOS notarization limitations.
+- User redirected delivery to the original `3271741455CJ/Codex-Token-Usage-Monitor` repository. Its main matches the fork baseline; collaborator push access was verified without exposing credentials. Update/release links target the original repository.
+- Local Windows Python 3.13: 52 tests, 51 passed and one symlink-privilege skip; Node dashboard: 19 passed. Native bundles, installer and cross-platform CI validation are pending at this entry; no publication claimed yet.
+
+## 2026-11-02 — Standalone Windows verification / Windows 独立程序验证
+
+- Built the no-UPX one-folder Windows application with bundled Python 3.13.14, export libraries and the pinned OFL Chinese font. The real frozen guarded worker generated all nine output files from synthetic data; source content/mtime remained unchanged and private fixture values were excluded.
+- Re-ran the 52 Python tests: 51 passed, one symlink-privilege skip; all 19 Node dashboard tests passed. A local Microsoft Defender custom scan of the built application reported zero detections. This does not prove SmartScreen download reputation, code signing or clean behavior on every machine.
+- Corrected unsigned installer handling so SignedUninstaller is enabled only when its signing backend is configured; clarified installed-app output guidance.
+- GitHub rejected the original-repository branch push because the existing PAT lacks workflow scope. No implementation commit, tag or Release has been published remotely yet. Browser submission also stopped because the UI tool could not confidently determine the browser URL. User chose to add workflow permission; publication awaits that change and native CI results.
+
+## 2026-11-02 — Original-repository native CI / 原仓库原生构建
+
+- User added workflow scope; implementation and workflow commits were pushed to the original repository's feature branch. Run 41376083373 passed Windows build/install/uninstall and Linux ARM64 native packaging; macOS tests exposed the system `/var` temporary-directory symlink, correctly rejected by the unchanged source guard.
+- Moved synthetic CI fixtures into the runner's real temporary directory and canonicalized the build smoke test's own temporary root. Source symlinks remain rejected; no runtime guard was relaxed. Native macOS revalidation remains required. Corrected the Chinese README's old CI-status sentence.
+
+The second native run passed macOS source regressions but the frozen app hit PyInstaller's internal resource links. Added a narrowly bounded read-only bundle resource exception: both lexical and resolved paths must remain inside the executable bundle. Source checks, external links and writes remain protected. Added synthetic regression coverage; native frozen-app revalidation is pending.
+
 ## Before publishing / 发布前待办
 
-- [ ] Manually verify layout in a local browser using synthetic demo data.
-- [ ] Rerun applicable tests against the final release candidate and record the results.
-- [ ] Decide repository visibility and license; add license text only after an explicit owner choice.
-- [ ] Review staged files for private reports, credentials and local paths.
-- [ ] Create the GitHub repository, push reviewed source, and create a tag/release when ready.
+- [x] Inspect synthetic overview/history pages in a real browser; see 2026-11-02 verification scope.
+- [x] Run candidate native CI on all five targets; run 41376896912 passed, including frozen worker and Windows install/uninstall checks.
+- [x] Confirm the original public repository and existing MIT license; no new license choice was made.
+- [x] Review explicit source/docs staging; no private reports, credentials, logs or local QA artifacts uploaded.
+- [ ] Merge reviewed source and publish the matching tag/Release; record final public assets and API checks after success.
+
+## 2026-11-02 — Candidate acceptance and handoff / 候选验收与交接
+
+- Candidate d492f26 passed all five native targets in run 41376896912. The new internal bundle resource/link-boundary tests ran on native CI; Windows and macOS ARM64 recorded all 53 Python tests passing, and each target ran the 19 Node tests and real standalone export checks.
+- Used a synthetic-only loopback server and a separate Playwright Edge session to inspect overview/history at 1440×1000. Screenshots were viewed; console reported no errors/warnings. No private live report was opened or uploaded.
+- Added docs/DELIVERY_REPORT.md with delivery status, implementation map, safety boundaries, actual validation, release/development commands and signing/notarization/platform follow-ups. Added README/file-guide links and corrected old changelog/status wording. Local links and version consistency passed. Formal publication is still pending at this entry.
 
 ## Entry format / 后续记录格式
 

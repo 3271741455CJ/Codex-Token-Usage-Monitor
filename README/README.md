@@ -2,7 +2,9 @@
 
 [English](README.md) | [简体中文](README-Simplified_Chinese.md)
 
-**Version 0.1.0 — initial implementation, not yet released on GitHub.**
+**Version 0.2.0 — standalone desktop packages and startup update checks.**
+
+Download Windows, macOS (Intel/Apple Silicon) or Linux (x64/ARM64) packages from [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases/latest). Python, export libraries and a Chinese font are bundled. See [installation and updates](../docs/INSTALLATION.md). Every launch checks this monitor’s public stable version and asks before opening its download page; decline/offline failures preserve local use. Use `--no-update-check` for offline startup.
 
 Inspect locally stored Codex usage in a single offline dashboard. The collector reads configuration, cached login metadata, session logs and a copy of the session index, then generates a standalone HTML report. By default it does not call account APIs. Explicit `--sync-official` uses the installed official client to read account usage and limits; it never uploads local logs.
 
@@ -23,12 +25,12 @@ This independent project is not affiliated with or endorsed by OpenAI. The dashb
 
 ## Requirements
 
-- Windows is the primary supported and tested environment. The launcher and installed-app version detection are Windows-specific; other platforms have not been validated.
-- Python **3.11+**, installed locally. Recorded validation used Python 3.12 and 3.15 on Windows.
+- Standalone builds target Windows 10/11 x64, macOS 13+ Intel/Apple Silicon and glibc Linux x64/ARM64. Windows Store version detection and optional official synchronization remain Windows-specific. See the supported baselines in [installation](../docs/INSTALLATION.md).
+- Source runs require Python **3.11+**; standalone desktop packages include Python.
 - A modern local browser and existing Codex local data.
 - Node.js is needed only for frontend development tests; no npm packages are required.
 
-Static collection uses the standard library. Interactive export uses locally available document libraries and a loopback-only service; there is no CDN, telemetry, automatic updater or dependency download.
+Static collection uses the standard library. Interactive export uses locally available document libraries and a loopback-only service; startup separately checks public GitHub release metadata. There is no CDN, telemetry, automatic replacement or runtime dependency download.
 
 ## Quick start
 
@@ -45,7 +47,7 @@ python -I -S -B .\run.py --codex-home 'D:\LocalCodexData' --output 'D:\LocalRepo
 python -I -S -B .\run.py --json
 ```
 
-Data directory precedence: `--codex-home`, then `CODEX_HOME`, then `%USERPROFILE%\.codex`. The default output is `.reports/` beside `run.py`. Its parent directory must exist. Output and protected data/install directories must not contain one another. UNC paths, mapped network drives, symlinks and Windows reparse points are rejected.
+Data directory precedence: `--codex-home`, then `CODEX_HOME`, then `%USERPROFILE%\.codex`. Source runs write `.reports/` beside `run.py`; installed apps write a separate per-user data directory, described in [installation](../docs/INSTALLATION.md). Output parents are created after path validation. Output and protected data/install directories must not contain one another. UNC paths, mapped network drives, symlinks and Windows reparse points are rejected.
 
 | Option | Purpose |
 | --- | --- |
@@ -55,6 +57,8 @@ Data directory precedence: `--codex-home`, then `CODEX_HOME`, then `%USERPROFILE
 | `--json` | Also create `usage.json` with the same privacy filtering as HTML; still for local use only |
 | `--show-api-key` | Print a local viewing guide only; no longer prints a key or any fragment |
 | `--help` | Show command help |
+| `--version` | Print this monitor’s version without checking online |
+| `--no-update-check` | Skip the startup version check and update prompt |
 
 To collect without opening a browser, run `run.py` directly or use `查看Codex用量.cmd --no-open`. The latter is a launcher option, not a Python option.
 
@@ -73,10 +77,11 @@ System credential stores, authentication commands, remote hosts and WSL-internal
 - Sources are read-only. SQLite connects only to a temporary copy of the database and WAL/SHM; temporary copies are removed after use.
 - A Python audit hook blocks socket/DNS/HTTP activity, arbitrary subprocesses and writes outside the report directory. Official sync permits exactly one preconfigured official stdio child; the native child is a separate trust boundary. Reparse points and writes through multiply linked files are rejected.
 - The standalone HTML has a restrictive CSP, hash-authorized scripts and no remote assets or network connections.
+- Frozen-app resource reads can follow internal bundle links only when both paths remain inside the executable bundle; external targets and all bundle writes remain blocked. User source/data/output checks continue to reject links.
 - Confidentiality is the foremost [product rule](../SECURITY.md). Credentials and fragments, identities, private URLs/configuration, original session/project titles and IDs, paths, conversations and tool/log contents are excluded from HTML (including embedded data), JSON, CSV and terminal output. Reports provide local viewing guides instead.
 - Sessions, turns, projects and sources use report-local anonymous numbers; no original-value map is saved. Usage/model/time/quota statistics remain available but private. Keep reports, CSV exports and real logs out of GitHub, issues and screenshots.
 
-Networking is permitted as needed for report data under the confidentiality rule. The current implementation keeps default offline mode and optional official sync; it adds no general crawler. The owner explicitly permits the necessary access token and account ID solely for OpenAI official authentication, never other destinations or report display.
+Networking is permitted as needed for report data under the confidentiality rule. The collector remains offline with optional official sync. Before collection, the launcher separately requests public metadata from `api.github.com`, without credentials, Codex data, cookies, inherited proxies or personal identifiers. The startup wait is bounded to four seconds; report refresh workers never check versions. The owner explicitly permits the necessary access token and account ID solely for OpenAI official authentication, never other destinations or report display.
 
 To inspect sensitive originals, open the Codex data directory you selected (by default `.codex` under your user home) and follow the report guide to `auth.json`, `config.toml`, session logs or a local SQLite copy. Original paths are not embedded in reports. `--show-api-key` now provides this guide only.
 
@@ -106,12 +111,14 @@ The demo uses synthetic data and writes `.qa/demo.html`. Tests need no internet.
 
 ## Status and license
 
-The first local implementation is available. Automatic visual acceptance remains outstanding because the available embedded browser rejected `file://` previews. No GitHub release has been published, and no CI service is configured. The project is licensed under the [MIT License](../LICENSE).
+Native CI builds and tag-triggered Releases are configured. Actual published versions are listed on [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases). A synthetic overview/history browser check at 1440×1000 passed on 2026-11-02; this is not exhaustive visual acceptance across devices. See [verification](../docs/VERIFICATION.md) and the [development handoff](../docs/DELIVERY_REPORT.md). The project is licensed under the [MIT License](../LICENSE).
 
 ## Interactive refresh and document exports
 
-Double-click the launcher to open a loopback-only report service. Keep its console open; “更新数据” regenerates the full report set and reloads the page only after success. Start `启动交互报告.cmd --sync-official` to also refresh official account figures. Default collection makes no external requests. Saved HTML remains a static snapshot.
+Double-click the launcher to open a loopback-only report service. Keep its console open; “更新数据” regenerates the full report set and reloads the page only after success. Start `启动交互报告.cmd --sync-official` to also refresh official account figures. Local collection makes no external requests; startup separately checks this monitor’s version. Saved HTML remains a static snapshot.
 
 The format selector offers DOCX/PDF summaries, XLSX complete sanitized records, PNG/JPEG/WebP/SVG overview images, and the existing filtered CSV. New formats export the whole snapshot, not the current filters. Files are generated together in local `snapshot-*` directories; failed refreshes preserve the previous batch. Filters reset after a successful reload.
 
-Exports require locally available python-docx, openpyxl, Pillow, reportlab and the Windows Microsoft YaHei font. The interactive launcher prefers the existing Codex bundled Python runtime, then PATH Python. No dependencies are downloaded. Use `python -I -B run.py --serve` or `--all-formats --json`; omit `-S` for export dependencies. The plain CLI and `--no-open` launcher remain static. See [interactive reports](../docs/INTERACTIVE_REPORTS.md) for file scopes and the local service security boundary.
+Standalone apps include python-docx, openpyxl, Pillow, reportlab and Report Sans SC (derived from Noto Sans SC under SIL OFL). Source runs need local dependencies and an available Chinese TrueType font; build-time `python build_tools/build.py --prepare-only` prepares the bundled font. The interactive launcher prefers the existing Codex bundled Python runtime, then PATH Python. No dependencies are downloaded. Use `python -I -B run.py --serve` or `--all-formats --json`; omit `-S` for export dependencies. The plain CLI and `--no-open` launcher remain static. See [interactive reports](../docs/INTERACTIVE_REPORTS.md) for file scopes and the local service security boundary.
+
+Windows builds support trusted Authenticode signing and timestamps, but unsigned/new downloads may still show SmartScreen warnings. macOS builds are not notarized. See [Windows distribution](../docs/WINDOWS_TRUST.md).

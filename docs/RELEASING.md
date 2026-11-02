@@ -1,25 +1,21 @@
-# Release checklist / 发布检查清单
+# Release process / 发布流程
 
-This is a future manual process. No remote repository, tag, release or CI job is created by these instructions.
+`VERSION` is authoritative; release tags must be `v` plus that exact value. User authorization is required to publish; the current task explicitly requests Releases. Do not rewrite published tags.
 
-## Prepare locally / 本地准备
+## Prepare
 
-- [ ] Finish the intended functionality and resolve or clearly document remaining limitations.
-- [ ] Synchronize documents using [MAINTENANCE.md](MAINTENANCE.md).
-- [ ] Confirm `VERSION`, root README and both full READMEs agree. Initial candidate: 0.1.0.
-- [ ] Record user-visible changes in `CHANGELOG.md`; keep publication status accurate.
-- [ ] Run applicable tests and update `VERIFICATION.md` with actual date, environment and results.
-- [ ] Manually inspect the synthetic demo in a local browser; never upload the private live report as a preview.
-- [ ] Choose repository visibility and, if publishing as open source, have the owner select and add a license. A license is not supplied automatically.
+1. Update both READMEs, root summary, changelog, work log, installation and release notes. Record actual checks in VERIFICATION.md; never invent release dates or signing status.
+2. Review an explicit source/docs allowlist. Exclude `.reports/`, `.qa/`, build outputs, credentials, config, logs, databases and real usage. The repository is MIT-licensed; bundled font licensing is SIL OFL and third-party notices are copied into packages.
+3. Install build dependencies in an isolated environment: `python -m pip install -r requirements-build.txt`. `python -B build_tools/build.py --prepare-only` fetches the pinned Google Fonts Git blobs, validates blob integrity and derives a regular TrueType font. Build-time downloads occur only on the builder, never in installed apps.
+4. Run `python -B -m unittest discover -s tests -v` and `node tests/test_dashboard.cjs`. Tests use synthetic fixtures; CLI fixtures disable update checks. Manually inspect the synthetic dashboard; DOM tests do not prove layout.
+5. `python -B build_tools/build.py` on the target OS builds a one-folder app, exercises a real guarded worker and packages the result. Windows requires Inno Setup 6; macOS uses hdiutil; Linux uses dpkg-deb. Local `--bundle-only` can validate the standalone app without installer tooling.
 
-## Review the upload / 检查上传内容
+## CI and publication
 
-Review the staged file list and content before the first commit/push. Use an explicit allowlist of source/docs rather than blindly adding the entire directory. Confirm `.reports/`, `.qa/`, credentials, logs, databases, CSV exports and environment files are absent. Check any already tracked files too; ignore rules do not untrack them.
+`.github/workflows/release.yml` builds natively on Windows x64, macOS Intel/ARM64 and Linux x64/ARM64 for pushes, pull requests and manual dispatch. Each job tests Python/JS, bundles the runtime/font, and exercises all nine standalone outputs; Windows also installs, exercises and uninstalls its package. Hosted runners contain public source and synthetic fixtures only.
 
-Create an empty GitHub repository for the first push. If following this route, do not initialize it with a second README/license/gitignore. Replace example repository URLs with your own; never put a password or token into a remote URL. Use your normal Git authentication flow.
+Review branch CI before merging. Push a matching version tag only when ready. After **all five** native builds succeed, the publish job verifies all eight packages, creates SHA256SUMS.txt, creates a draft Release, uploads the complete asset set, then publishes. Failed builds never publish a partial release. An interrupted upload can leave a draft requiring maintainer cleanup/retry; do not recreate a public release with different binaries under the same tag.
 
-## Publish when authorized / 正式发布
+Windows trusted signing is optional until configured; see [WINDOWS_TRUST.md](WINDOWS_TRUST.md). `REQUIRE_WINDOWS_SIGNING=true` blocks unsigned publication. If signing is configured, launcher/setup/temp copies/uninstaller signature and timestamp validation must pass. Unsigned packages must be labeled in notes. macOS builds currently have no Developer ID notarization.
 
-After the final commit is reviewed, push its branch. A GitHub Release is separate from uploading source. When actually publishing the release, record the real release date/status, commit those documentation changes, then create an annotated tag matching `VERSION` and push that tag. Create release notes from `CHANGELOG.md`. Do not upload `.reports/`, `.qa/` or a zip of the entire working folder as release assets.
-
-Verify the remote file list, README links, tag and release notes. For subsequent updates, use focused commits/PRs and the next appropriate version. Do not use force push to resolve an unexpected first-push conflict without understanding the remote history.
+Finally verify the public Release assets, checksums, version and current release API. Record actual CI and publication evidence in WORKLOG/VERIFICATION, without real user data. GitHub source archives are not installation packages.
