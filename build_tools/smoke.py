@@ -9,7 +9,7 @@ import tempfile
 def main():
     executable = str(Path(sys.argv[1]).resolve())
     with tempfile.TemporaryDirectory() as temp:
-        root = Path(temp)
+        root = Path(temp).resolve()
         home = root/'synthetic-codex'; home.mkdir()
         (home/'sessions').mkdir()
         source = home/'sessions'/'demo.jsonl'

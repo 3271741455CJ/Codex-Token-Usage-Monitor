@@ -44,11 +44,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python -B build_tools/build.py --prepare-only
       - name: Synthetic Python regression tests
+        env:
+          # macOS /var is a system symlink; keep synthetic fixtures in a real
+          # local directory without relaxing source-path link protections.
+          TMPDIR: ${{ runner.temp }}
         run: python -B -m unittest discover -s tests -v
       - name: Dashboard regression tests
         run: node tests/test_dashboard.cjs
       - name: Native package and standalone smoke test
         env:
+          TMPDIR: ${{ runner.temp }}
           WINDOWS_CERTIFICATE_BASE64: ${{ secrets.WINDOWS_CERTIFICATE_BASE64 }}
           WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
           REQUIRE_WINDOWS_SIGNING: ${{ vars.REQUIRE_WINDOWS_SIGNING }}

@@ -109,7 +109,7 @@ python -I -S -B .\run.py --show-api-key
 
 ## 当前状态与许可
 
-首版本地实现已完成。内置浏览器拒绝 `file://` 预览，因此自动视觉验收仍未完成；DOM 测试不能代替真实浏览器排版验收。目前没有发布 GitHub Release，也未配置云端 CI。项目采用 [MIT 许可证](../LICENSE)。
+已配置原生构建与测试 CI，并通过版本标签触发完整 Release；实际已发布版本以 [Releases](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases) 为准。浏览器排版验收仍未完成，DOM 测试不能代替视觉检查。项目采用 [MIT 许可证](../LICENSE)。
 
 ## 交互更新与多格式导出
 

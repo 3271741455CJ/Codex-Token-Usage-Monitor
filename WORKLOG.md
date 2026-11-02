@@ -87,6 +87,11 @@ Version: **0.1.0**, initial local implementation. GitHub upload/release: **not p
 - Corrected unsigned installer handling so SignedUninstaller is enabled only when its signing backend is configured; clarified installed-app output guidance.
 - GitHub rejected the original-repository branch push because the existing PAT lacks workflow scope. No implementation commit, tag or Release has been published remotely yet. Browser submission also stopped because the UI tool could not confidently determine the browser URL. User chose to add workflow permission; publication awaits that change and native CI results.
 
+## 2026-11-02 — Original-repository native CI / 原仓库原生构建
+
+- User added workflow scope; implementation and workflow commits were pushed to the original repository's feature branch. Run 41376083373 passed Windows build/install/uninstall and Linux ARM64 native packaging; macOS tests exposed the system `/var` temporary-directory symlink, correctly rejected by the unchanged source guard.
+- Moved synthetic CI fixtures into the runner's real temporary directory and canonicalized the build smoke test's own temporary root. Source symlinks remain rejected; no runtime guard was relaxed. Native macOS revalidation remains required. Corrected the Chinese README's old CI-status sentence.
+
 ## Before publishing / 发布前待办
 
 - [ ] Manually verify layout in a local browser using synthetic demo data.
