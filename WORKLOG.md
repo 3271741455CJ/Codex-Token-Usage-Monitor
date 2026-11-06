@@ -1,5 +1,11 @@
 # Work log / 工作记录
 
+## 2026-11-06 — Codex Lens synthetic review check
+
+- GitHub Actions on Windows and Python 3.13 failed when the paired review did not finish within the fixture's five-second wait. A synthetic delay in local SQLite reservations reproduced the same assertion.
+- The fixture now runs the worker scheduled by `Service.submit` directly and asserts its terminal state. It still checks the full review budget, fresh question seeds and persisted screen provenance. Queue and cancellation tests still use background threads.
+- The delayed reproduction passed after the change. Local Windows detector checks ran 157 Python tests (156 passed, one skipped), all 11 dashboard tests and the offline CLI suite listing. Main project checks ran 53 Python tests (50 passed, three skipped) and passed all 19 dashboard tests.
+
 ## 2026-11-06 — Codex Lens module release candidate
 
 - Prepared the detector's 0.1.0 candidate with its own package version, the existing MIT license, a bilingual project landing page, a technical mathematics document, and a multi-resolution application and installer icon.
