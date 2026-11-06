@@ -1,0 +1,33 @@
+name: Relay Auditor synthetic checks
+on:
+  push:
+    paths: ['subprojects/relay_auditor/**', '.github/workflows/relay-auditor.yml']
+  pull_request:
+    paths: ['subprojects/relay_auditor/**', '.github/workflows/relay-auditor.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.13']
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: subprojects/relay_auditor
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Core, protocols, persistence, budgets and evidence (synthetic only)
+        run: python -B -m unittest discover -s tests -v
+      - name: Dashboard logic
+        run: node tests/test_dashboard.cjs
+      - name: Public CLI without model requests
+        run: python -I -S -B run.py suites

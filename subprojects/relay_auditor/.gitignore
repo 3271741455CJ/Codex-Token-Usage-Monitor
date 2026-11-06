@@ -1,0 +1,10 @@
+.relay-data/
+.venv/
+build/
+dist/
+release/
+__pycache__/
+*.pyc
+relay-assessment.json
+relay-audit.json
+*.log

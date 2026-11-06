@@ -2,6 +2,8 @@
 
 ## Start here / 阅读顺序
 
+Codex Lens lives in `subprojects/relay_auditor/` as the monitor's future detector module. Its own [public-source staging and native package workflow](../subprojects/relay_auditor/docs/RELEASING.md) prepares a reviewable standalone candidate. The [v2 extension contract](../subprojects/relay_auditor/docs/EXTENDING.md#integration-contract--token监视器接入) defines anonymous assessment and usage inputs for later integration. Its generated `.relay-data/` and exported snapshots are private and ignored. See the [detector file guide](../subprojects/relay_auditor/FILE_GUIDE.md).
+
 Read the [English README](../README/README.md) or [中文说明](../README/README-Simplified_Chinese.md), then the data-source and maintenance documents when needed.
 
 | Path | Purpose / 作用 | Publish? / 是否提交 |
@@ -90,3 +92,15 @@ The user's `.codex` data is external input, never part of this repository. A clo
 - `build/`, `dist/`, `release/`, generated `codex_usage/assets/ReportSansSC.ttf`: ignored build outputs, not private source inputs.
 
 User launch → separate public version check/consent → loopback service → fixed worker with update checks disabled → unchanged guarded collection/privacy exports. Installed output goes to a separate validated per-user directory; source output stays `.reports/`.
+
+Relay Auditor's separate Windows desktop entry is `subprojects/relay_auditor/desktop.py`; its `relay_auditor/desktop.py`, `desktop_actions.py` and `runtime.py` own the local window/native actions/data directory. Its own `build_tools/relay.spec`, `build.py`, `smoke.py`, pinned requirements and `WINDOWS.md` produce an ignored, unsigned Windows portable bundle with a fixed worker. These files do not modify or participate in the parent monitor's desktop/release workflow.
+
+`subprojects/relay_auditor/relay_auditor/models.py` validates model lists/private user names; the subproject controller/server expose UI options separately from anonymous export. Local desktop builds use fresh ignored candidate folders and write `dist/latest-desktop.cmd` only after successful smoke; the source desktop launcher follows it without interrupting an older process.
+
+Relay Auditor's product core is `core.py` (desktop/CLI/SDK owner), `suites.py`/`quality.py` (versioned procedural tasks), `reports.py`/`exporting.py` (v2 evidence/history/offline HTML), `planning.py` (preflight/support states), `profiles.py`/`vault.py` (private settings/exact owned OS credentials), `adapters.py` (native Anthropic/Gemini), `calibration.py`/`calibration_cli.py` (frozen source studies), and `demo.py`/`prompts.py` (offline demonstration/non-echo input). `__main__.py` is the module entry. Its `docs/METHODS.md`, `EXTENDING.md`, `DEVELOPMENT_PLAN.md` document evidence, contributions and open gates. `.github/workflows/relay-auditor.yml` defines separate synthetic-only CI without model keys or publication. The subproject file guide describes schema-v2 integration; parent guarded collection remains unchanged.
+
+`subprojects/relay_auditor/relay_auditor/official.py` owns fixed official provider/region presets, exact-model matching and protocol compatibility. Local profiles persist monotonic target aliases, and deletion uses the profile UUID to remove settings and its owned credential slot while preserving the aggregate store.
+
+`subprojects/relay_auditor/relay_auditor/assessment.py` runs the versioned initial screen and also drives the primary calibration study. `tests/test_assessment_review.py` checks the independently budgeted review and its binding to the original run.
+
+`families.py` chooses experimental tasks from the declared family. `assessment.py` runs one-button assessment, exact official pairing, aggregate diagnostics and per-task evidence. `reports.py` supplies the plain-language summary to the live card and HTML export.

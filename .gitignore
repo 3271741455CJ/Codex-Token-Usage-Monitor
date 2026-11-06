@@ -1,4 +1,9 @@
 .reports/
+.relay-data/
+relay-assessment.json
+relay-assessment.html
+settings.json
+relay-audit.json
 .qa/
 __pycache__/
 *.pyc

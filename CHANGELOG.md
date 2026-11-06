@@ -5,6 +5,25 @@ Versions use `MAJOR.MINOR.PATCH`; tags use `vMAJOR.MINOR.PATCH`. A heading is no
 
 ## Unreleased / 待发布变更
 
+- Prepared Codex Lens module release candidates with a cross-platform native build matrix, app icon, public-source archive and mathematical principles document. Added separate anonymous v2 assessment and usage routes for future Token Usage Monitor integration.
+
+- Relay Auditor desktop adds a light detection workbench with a target picker, a compact model toolbar and side-by-side official scores. The report separates the observed gap from its evidence limits and keeps detailed statistics available on demand. Fixed the summary using official counts in place of relay counts.
+
+- Relay Auditor fixes restarting imported targets: import offers opt-in Windows vault storage, and a pasted relay key can unlock and start an existing target from one click. The versioned assessment separates correct, incorrect and unscorable responses and offers an opt-in fresh paired review with a request preview. Calibration studies run the desktop assessment engine.
+
+- Relay Auditor adds a separate official-reference form with 16 presets across 10 providers, exact-model matching and one-click paired assessment. Target cards can be deleted with their app-owned keys while retaining history and usage.
+
+- Relay Auditor desktop now offers one-button assessment with a request preview, plain-language verdict, per-task official comparison and expandable evidence. Added declared-family test selection, experimental DeepSeek Chat, fixed DeepSeek references, separate direct API usage and explicit response failure reasons. Estimate failures can be retried in place.
+
+- Relay Auditor now shares a Python engine across desktop/CLI/SDK, with reproducible procedural quality/context/reasoning tasks, schema-v2 four-dimensional experimental evidence, same-condition history, queues/cancellation/progress, budget/cost preflight and anonymous offline HTML reports. Added private target settings, opt-in owned Windows vault items and disabled/locked restart behavior; custom names remain excluded from evidence/exports.
+- Added experimental native Anthropic/Gemini text/stream adapters, a support matrix separating connection/evaluation/reference/calibration, an offline synthetic demo, frozen controlled-study tooling and source/synthetic CI plus bilingual contribution/method docs. No real calibration, verified-model claims, parent runtime integration or public release is implied.
+
+- Relay Auditor: fixed native import-dialog filters and visible error feedback; added known-location CC Switch/Codex++ import, explicit import-and-screen, model dropdowns from configuration/relay listing, private custom test names and per-target reasoning controls. Changed model/effort invalidates the live result and pauses periodic detection; anonymous history and budgets persist.
+
+- Added an independent Windows x64 desktop window and local unsigned portable build for Relay Auditor, with native configuration/folder selection, private-data exports, optional taskbar reminders and a bundled fixed offline worker. Detection remains opt-in; no parent integration or release publication.
+
+- Added the independent experimental Relay Auditor subproject: disabled-by-default relay probes, adjustable intervals, budgets, local UI/CLI, optional official API reference, read-only CC Switch/Codex++ provider discovery and request-evidence accounting contracts. Official login is never model-tested; the released monitor/runtime remains unmodified. Real model calibration and historical request-ledger attribution are pending.
+
 ## 0.2.0 — Desktop distribution / 桌面分发
 
 Published on 2026-11-02: [v0.2.0](https://github.com/3271741455CJ/Codex-Token-Usage-Monitor/releases/tag/v0.2.0).

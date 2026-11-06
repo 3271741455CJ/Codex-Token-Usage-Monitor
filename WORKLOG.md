@@ -1,6 +1,64 @@
 # Work log / 工作记录
 
+## 2026-11-06 — Codex Lens module release candidate
+
+- Prepared the detector's 0.1.0 candidate with its own package version, the existing MIT license, a bilingual project landing page, a technical mathematics document, and a multi-resolution application and installer icon.
+- Added a manual native build matrix for Windows x64, macOS Intel/Apple Silicon and Ubuntu 24.04 x64/ARM64. The Windows portable build completed locally. Automatic approval review blocked downloading and running the Inno Setup compiler under its policy, so the Windows setup package and the macOS/Linux packages await native runners.
+- Added aggregate assessment and usage session routes and direct SDK access for future monitor integration. Synthetic tests exercised the privacy and origin guards and the offline preflight.
+- Passed 157 Python tests and 11 Node tests on Windows. The 93-file source archive verified all internal hashes and document links, then passed the offline demo and 157 Python tests from an extracted standalone tree. The Windows portable archive and its frozen offline worker passed local smoke. GitHub upload and publication await the owner's confirmation.
+
+## 2026-11-05 — Light desktop workbench
+
+- Implemented the selected light design. The active target, model, reference status and request estimate share a toolbar. Paired scores and skill comparisons appear together, with formal statistics in the details. History owns the export controls and settings owns desktop notifications.
+- Fixed a sanitization bug that could cause the official answer counts to overwrite the relay summary. Older entries with an unlabeled official count still use the relay count.
+- Passed 154 Python and 11 Node tests. Edge with a synthetic backend verified target switching, deletion fallback, locked-key entry, reference assessment and review preview at wide and narrow widths. The Windows x64 package and frozen offline worker passed build smoke and archive verification.
+
+## 2026-11-05 — Assessment accuracy and imported-key restart
+
+- Reproduced the locked-card click path in Edge and corrected the Key submission order. Imports offer opt-in storage in the existing target-owned Windows credential item. A locked target can use a newly pasted Key directly on Start.
+- Aligned task prompts and grading in quality-v2. Assessment-v2 reports planned, attempted, correct, incorrect and unscorable counts for each side. A matched initial screen uses 20 requests. It preserves formal decision allocation for complete review batches and offers a budget preview for optional independently seeded review. The new history signal requires four comparable complete runs.
+- The source calibration tool exercises the desktop engine against frozen GPT/Codex settings. It reports pilot performance by task and pilot costs separately, reserves validation seeds and dates, and verifies stored conclusions against paired counts.
+- Passed 154 subproject Python tests and 9 Node tests. Edge with a synthetic backend and simulated vault covered both restart paths, reference review, budget blocking, cancellation and comparison display. The local Windows x64 archive passed its worker smoke, checksum and packaged-resource checks. Real model accuracy and native Windows window interaction remain separate verification gates.
+
+## 2026-11-05 — Same-model official reference and target deletion
+
+- Added independent reference configuration with 16 fixed presets across 10 providers, exact IDs and verified aliases, compatible protocol checks and one-click paired reports. Static catalogs defer Key verification to detection. Legacy keys with a recorded original origin remain independently saved and pinned. Authentication, model and parameter blockers stop further official requests in the current run.
+- Target deletion uses the owned UUID, cancels pending and periodic work, removes only the target profile and its credential item, and preserves history and usage. Stable aliases survive restart and are never recycled. A stale instance checks that its target still exists before sending follow-up requests.
+- Passed 144 subproject Python tests and 8 Node tests. Edge exercised the GPT alias flow, permission and region feedback, report details, deletion guards and failure handling against a synthetic loopback backend. The local Windows x64 package and frozen offline worker passed smoke and archive checks. Real provider access, real-model calibration and native window interaction were outside this verification.
+
+## 2026-11-04 — One-button Relay Auditor preview
+
+- Added one-click assessment, target-level progress and cancellation, retriable estimates, plain result summaries and per-task paired counts. Specialist settings remain expandable.
+- The declared family selects an experimental GPT/Codex, DeepSeek, Claude or Gemini profile. Other families use the shared ability suite. DeepSeek Chat uses a fixed official reference destination and separately counts direct API checks. The original destination of stored reference keys survives protocol changes.
+- Isolated Python suite 112/112 and Node suite 6/6 passed. Edge with a synthetic loopback service exercised unpaired ability, official DeepSeek and matched pairs, plus one-click model switching, cancellation, estimate retry, sample controls and responsive layout. Windows bundle and offline worker smoke passed. No real model samples were collected. Native window acceptance remains open.
+
+## 2026-11-03 — Relay Auditor quality-product implementation
+
+- Implemented the approved product-plan software inside the existing independent subdirectory, sharing core between desktop/CLI/Python. Added versioned deterministic procedural quality/context/reasoning tasks, replay seeds/counts/public comparison parameters, v2 four-dimensional experimental reports, v1 legacy protection and same-condition history. No generated code executes; virtual tool arguments are text tests, not native function-call certification.
+- Added private target/name/settings persistence separate from anonymous evidence, default-unsaved keys and optional exact-owned Windows vault storage without enumeration/plaintext fallback. Restores are disabled/locked as applicable. Added bounded sequential queue, current/queued cancellation, progress, preflight request/token/manual-price estimates, support matrix, readable offline HTML, anomaly/interruption timeline and offline synthetic demo. Model lists/custom names/reasoning/import separation remain.
+- Added native Anthropic/Gemini text/stream adapters with fixed independent official reference origins, terminal/truncation/usage handling and explicit unsupported parameters. No real endpoint/model compatibility or per-family accuracy claim. Frozen source study tooling hashes generator/grader/statistics/transports, separates pilot/new dates, budgets every trial, preserves interruptions/failures and validates duplicate/cross-study outcomes; exact confidence bounds propose review candidates only. No paid study was run and no verified public baseline was invented.
+- Added bilingual product docs, methods/source API/contribution guidance and a separate Windows/Linux Python3.11/3.13 synthetic-only CI definition; hosted runs/third-party contribution acceptance are not claimed. Parent runtime, offline guards and VERSION unchanged; no commit/merge/split/push/sign/release. Manager request-ledger attribution remains pending.
+- Actual checks: child Python106/106 and Node6/6; root Python53 (50 passed/3 environment skips) and Node19/19. Source CLI offline demo passed. Edge synthetic-backend flows at1440×1080/700×900 passed locked restore/key update, preflight, queue/cancel, context results, missing-reference guard and anonymous HTML download, with zero observed runtime errors/horizontal overflow. Browser/server were closed. Windows portable candidate/frozen-worker smoke passed; final resource/checksum/ignore/link checks are recorded in verification.
+- Open gates: real calibrated FP/power/holdout results; full current native Windows window/file-picker/exit/vault acceptance; per-family validation; community independent extension. Final native-window launch was previously denied by automatic approval (only “blocked by policy”); it was not bypassed or counted as successful validation.
+
 This log records completed work, evidence and remaining tasks. It is not a release history or a copy of private conversations. See [CHANGELOG.md](CHANGELOG.md) for version changes.
+
+## 2026-11-03 — Relay Auditor model options and provider import
+
+- Reproduced native dialog failure with actual pywebview parser: the old filename-only filters and plus-sign description were invalid. Fixed valid wildcards/descriptions, visible import status/errors/cancel, known-location auto-import and manual custom-file selection.
+- Added model dropdowns from bounded config/modelList or explicit relay /models GET; distinct official-reference discovery uses only independent official Key and fixed official origin. Added live-only custom names and per-target reasoning options, pending-setting application before tests, default-reference following model changes, and clear live-result/periodic reset on changed model/effort. Anonymous history/budget/exports exclude names.
+- Added explicit import-only versus import-and-screen, with three requests for the latter and no periodic auto-enable. Official directory entries expose no relay tests. No source switches, authentication renewal, real configs or model calls.
+- Isolated Python suite78/78, Node5/5 passed. Parent Python53 total,50 passed/3 environment skips; Node19/19. Browser QA with synthetic provider source/fake API passed model choice/custom name/xhigh import-and-screen, edited model/max setting, manual address model listing, official exclusion, button status and 1440x1080/390x844 layouts (no observed JS errors/horizontal overflow). Focused checkbox-sync reproduction failed with old behavior and passed after fix; independent-reference route failed with old behavior and passed fixed.
+- Built a fresh Windows candidate and ZIP, frozen-worker synthetic smoke passed. Source desktop launcher now follows a generated latest-candidate launcher after successful build without interrupting a running old EXE. Final native-window launch with isolated synthetic environment was rejected by automatic approval with only “blocked by policy”; no workaround or final native-window claim. Real-library filter validation and simulated UI flows provide the stated evidence.
+- No commit, merge, publication, signing or main-runtime/version change. True model calibration and manager request-ledger attribution remain pending.
+
+## 2026-11-02 — Relay Auditor Windows desktop / 子项目 Windows 桌面端
+
+- Added an independent WebView2 window, source desktop launcher and local Windows x64 portable build; no changes to parent runtime/entry points or VERSION. No commit, merge or publication.
+- Desktop owns loopback/scheduler lifetime, uses dedicated per-user data and ephemeral private browser storage. Native configuration/directory selection never returns paths to the page. Exclusive anonymous exports stay under dedicated output; reminders optionally flash the taskbar. Fixed bundled offline worker is hidden and terminated on observer shutdown.
+- Pinned isolated desktop/build dependencies, allowlisted assets, copied third-party notices, added real frozen-worker synthetic smoke and portable SHA-256 output. No runtime downloads, elevation, installer registration, tray process or startup task.
+- Child Python 68/68 and Node 4/4 passed. Parent Python 53 total, 50 passed/3 environment skips, Node 19/19. Native candidate build and frozen synthetic worker passed; visible desktop configured a synthetic target with default-off detection and editable 2.5-minute interval, with zero issued requests. Native file-picker live clicks were interrupted by computer-use user-input detection; their handlers/cancellation/privacy have synthetic regressions rather than a claimed live acceptance.
+- Independent review's MSHTML fallback and silent initialization-failure findings were reproduced with failing regressions and fixed. In-flight detector Store remains open for settlement until process exit; daemon page requests can fail during shutdown. No unresolved critical/important review finding. No real credentials, local usage or model API calls used. Real calibration, manager request-ledger attribution and parent integration remain pending.
 
 ## Current status / 当前状态
 
@@ -114,6 +172,15 @@ The second native run passed macOS source regressions but the frozen app hit PyI
 - Release run 41378006761 completed all five native build/test jobs and publication successfully. The public v0.2.0 Release has eight native packages, five dependency inventories and SHA256SUMS.txt.
 - Downloaded the public checksum manifest and matched all 13 file hashes to GitHub's uploaded asset digests. Verified the real public startup-check path detects 0.2.0 for 0.1.0 and returns no update for 0.2.0.
 - Completed the development handoff report with merge/release/CI evidence, implementation/development/release instructions and explicit remaining signing/notarization/platform limitations. Superseded duplicate CI runs were canceled; the final tag run remains complete and green. This final documentation update does not change the release binaries.
+
+## 2026-11-02 — Relay Auditor subproject prototype / 中转检测子项目
+
+- Saved the approved plan and evolving attribution requirements in `agent.md`; added `subprojects/relay_auditor/` as a separately runnable subproject, not a separate Git repository. No commit, tag, push or merge was performed, and no parent runtime entry or collector guard was changed.
+- Implemented synthetic probes, experimental fingerprint screening, paired capability and fixed-batch distribution tests, explicit Responses/Chat/SSE handling, persistent budgets/audit indices and atomic batch reservation, adjustable opt-in scheduling, local UI/CLI/Windows source launcher, offline usage worker, anonymous snapshots and request-evidence source grouping.
+- Read-only provider discovery supports verified CC Switch and Codex++ structures, with SQLite temporary copies, official-login/direct-API exclusion and mixed-login relay recognition. Manager request-ledger ingestion and historical reconciliation remain pending; current configuration never rewrites historical attribution.
+- Independent review found five important issues; regression tests reproduced and fixed scheduling cancellation races, reference-model baseline collisions, invalid-answer denominators, truncated SSE acceptance and unfrozen batch budgets/partial-audit evidence.
+- Actual synthetic checks so far: subproject Python 55 passing; Node 4 passing. Parent Python 53 total, 50 passing and 3 skipped (two symlink-privilege checks, export dependencies unavailable); parent Node 19 passing. Browser QA used a simulated API only, Edge at 1440x1080 and 390x844: default off, interval edit to 150 seconds, on/off, manual three-call screen, zero observed JS errors and no horizontal page overflow. Final catalog-interface recheck passed at both viewports: official entries expose no relay detection button, importing keeps the new target disabled, request count remains three and no JS errors/page horizontal overflow were observed. The built-in browser failed to initialize its assets; the existing Playwright CLI/Edge fallback was used.
+- No real credentials, private reports or actual model APIs were read/called for development. No real calibration, performance guarantee, standalone binary publication, request-ledger reconciliation or main-dashboard integration is claimed.
 
 ## Entry format / 后续记录格式
 

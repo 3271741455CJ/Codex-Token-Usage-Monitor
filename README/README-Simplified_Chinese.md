@@ -10,6 +10,14 @@
 
 ## 环境要求
 
+实验开发：[Relay Auditor 中转检测子项目](../subprojects/relay_auditor/README/README-Simplified_Chinese.md) 独立运行，桌面/CLI/Python 共用核心，具备主动开启的质量/上下文/推理任务、四维报告、队列/历史、私人设置及可选 Windows 自有凭据项。桌面端可选 10 家标准文本 API 的官方同型号参考，删除目标后保留历史与用量。真实模型校准仍待进行。只读 CC Switch/Codex++ 识别保持官方登录分开且不检测它。本地未签名 Windows x64 便携包与已发布监视器分开。请求账本归属和主项目集成仍待完成。见[计划与验证状态](../agent.md)。
+
+导入中转时可选择保存 Key 供重启使用。桌面浅色工作台可选择当前目标，并排查看中转与官方成绩。报告分列答题质量与失败尝试，符合条件的同题初筛可独立预览预算并用新题复测。校准工具使用同一个评估引擎。
+
+Codex Lens 是主项目的检测功能模块。候选版提供[独立安装与构建矩阵](../subprojects/relay_auditor/docs/INSTALLATION.md)，并通过 [v2 接入契约](../subprojects/relay_auditor/docs/EXTENDING.md#integration-contract--token监视器接入)为后续扩展留出接口。
+
+桌面端选声明型号后，点「开始检测」即可查看分项表现、官方差距和响应失败原因。GPT/Codex、DeepSeek、Claude、Gemini 的实验测试方案独立于请求协议选择。DeepSeek Chat 加入固定官方参考入口和独立计量的直连能力测试。
+
 - 独立包面向 Windows 10/11 x64、macOS 13+ Intel/Apple Silicon、glibc Linux x64/ARM64。Windows Store 版本识别与官方同步仍仅限 Windows，具体系统基线见[安装说明](../docs/INSTALLATION.md)。
 - 源码运行需要 Python 3.11+；独立安装包内置 Python。
 - 本机浏览器和已有 Codex 数据。仅开发时的前端测试需要 Node.js，无须 npm 包。
@@ -78,6 +86,8 @@ python -I -S -B .\run.py --show-api-key
 详细字段和核对方法见 [数据来源说明](../docs/DATA_SOURCES.md)。
 
 ## 隐私与只读措施
+
+独立启动的[实验中转检测子项目](../subprojects/relay_auditor/README/README-Simplified_Chinese.md) 采用单独、显式启用的合成探针边界：中转专用 Key 仅到所选中转，独立官方 API Key 仅到固定参考接口，不读取官方登录 token。这不扩大主采集器权限。供应商配置只读，历史归属须有请求证据，不能看见官方登录就把中转消耗归入官方。
 
 - 原始配置、登录信息、JSONL 和数据库只读；只写入独立的报告目录。SQLite 原库**不直接连接**：只读复制数据库及 WAL/SHM 到报告目录，读取副本后清理副本。
 - 采集进程安装 Python audit hook，拒绝 Python 网络 socket、DNS、HTTP、任意子进程与报告目录外的写入，SQLite 只允许只读连接副本。官方同步模式仅放行一次预配置的官方 stdio 子进程；该原生客户端是独立的信任边界。交互入口另行启动仅本机监听的服务和固定采集工作进程。

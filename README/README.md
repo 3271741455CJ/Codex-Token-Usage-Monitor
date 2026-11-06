@@ -12,6 +12,14 @@ This independent project is not affiliated with or endorsed by OpenAI. The dashb
 
 ## Features
 
+Experimental development: [Relay Auditor](../subprojects/relay_auditor/README/README.md) runs separately with a shared desktop/CLI/Python core, opt-in procedural quality/context/reasoning tests, four-dimensional reports, queues/history, private settings and optional owned Windows vault storage. The desktop has exact-model official reference presets for 10 text API providers. Deleting a target preserves its history and usage. Real-model calibration remains pending. Read-only CC Switch/Codex++ discovery keeps official login separate and never model-tests it. An unsigned local Windows x64 portable build is separate from the released monitor. Request-ledger attribution and parent integration remain pending. [Plan and evidence](../agent.md).
+
+Imported relay keys can be saved explicitly for restart. The light detection workbench lets users select one target and read paired scores side by side. The desktop separates answer quality from failed attempts and offers a separately budgeted review with fresh tasks after a qualifying paired screen. The calibration tool exercises the same assessment engine.
+
+Codex Lens is the monitor's detector module. The candidate has a [standalone installation and build matrix](../subprojects/relay_auditor/docs/INSTALLATION.md) and a [v2 integration contract](../subprojects/relay_auditor/docs/EXTENDING.md#integration-contract--token监视器接入) for later extension integration.
+
+Select the declared model and start assessment from one desktop button. Results lead with task scores, the observed official gap and response failures. Experimental GPT/Codex, DeepSeek, Claude and Gemini test profiles are selected independently of protocol. DeepSeek Chat adds a fixed official reference and separately accounted direct API assessment.
+
 | View | What it shows |
 | --- | --- |
 | Account and configuration | Local viewing guides for identity/credentials/private configuration; default model and reasoning effort |
@@ -73,6 +81,8 @@ Five-hour and weekly limits are window percentages, not fixed token quotas. Cach
 System credential stores, authentication commands, remote hosts and WSL-internal files are not automatically queried. Config defaults may be overridden by project or turn settings; historical turn metadata is used where available.
 
 ## Privacy and read-only design
+
+The separately launched [experimental relay subproject](../subprojects/relay_auditor/README/README.md) has its own explicit opt-in synthetic-probe boundary: dedicated relay credentials only to the selected relay, separate official API credentials only to the fixed reference API, and never official-login tokens. This does not expand the monitor collector's permissions. Provider discovery is read-only; historical attribution requires request evidence, not the presence of an official login.
 
 - Sources are read-only. SQLite connects only to a temporary copy of the database and WAL/SHM; temporary copies are removed after use.
 - A Python audit hook blocks socket/DNS/HTTP activity, arbitrary subprocesses and writes outside the report directory. Official sync permits exactly one preconfigured official stdio child; the native child is a separate trust boundary. Reparse points and writes through multiply linked files are rejected.
